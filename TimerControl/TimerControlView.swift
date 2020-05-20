@@ -19,8 +19,10 @@ public class TimerControlView: UIView {
     public var completionFactor: CGFloat = 0.0
     var fillColor: UIColor = UIColor.gray
     var arcColor: UIColor = UIColor.blue
+    var arcPercentageWidth: CGFloat = 0.04
+    var arcWidth: CGFloat = 0
+    let arcSpacer: CGFloat = 1.0
     var counterLabelTextColor: UIColor = UIColor.white
-    var arcWidth: CGFloat = 10.0
     var counterLabel = UILabel()
     public var remaingTime: Int = 0
     public var animateRemaining: Bool = false
@@ -46,10 +48,23 @@ public class TimerControlView: UIView {
 
     required public init(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)!
-        NotificationCenter.default.addObserver(self, selector: #selector(updateDueToApplicationReturn), name: UIApplication.didBecomeActiveNotification, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(saveStateForApplicationBackGrounding), name: UIApplication.didEnterBackgroundNotification, object: nil)
+        setupApplicationStateObservers()
+        setupCounterLabel()
+    }
 
-        counterLabel = UILabel(frame: CGRect(x: 0, y: 0, width: 60, height: 14))
+    private func setupApplicationStateObservers() {
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(updateDueToApplicationReturn),
+                                               name: UIApplication.didBecomeActiveNotification,
+                                               object: nil)
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(saveStateForApplicationBackGrounding),
+                                               name: UIApplication.didEnterBackgroundNotification,
+                                               object: nil)
+    }
+
+    private func setupCounterLabel() {
+        counterLabel = UILabel(frame: CGRect(x: 0, y: 0, width: 0, height: 0))
         counterLabel.textAlignment = NSTextAlignment.center
         counterLabel.textColor = counterLabelTextColor
         counterLabel.translatesAutoresizingMaskIntoConstraints = false
@@ -69,23 +84,13 @@ public class TimerControlView: UIView {
                                          multiplier: 1.5,
                                          constant: 0)
         self.addConstraints([centreX, centreY])
-
         self.counterLabel.text = self.displaySecondsCount(seconds: 0)
     }
 
-
     // MARK: Draw
 
-
     override public func draw(_ rect: CGRect) {
-
-        //Inner Oval
-        let arcSpacer: CGFloat = 5.0
-        let innerRect = CGRect(x: arcWidth + arcSpacer, y: arcWidth + arcSpacer, width: self.bounds.width - 2 * (arcWidth + arcSpacer) , height: self.bounds.height - 2 * (arcWidth + arcSpacer))
-        let ovalPath = UIBezierPath(ovalIn: innerRect )
-        fillColor.setFill()
-        ovalPath.fill()
-
+        drawInnerOval(rect)
         self.drawOuterArc()
 
         if(animateRemaining == true) {
@@ -93,9 +98,19 @@ public class TimerControlView: UIView {
         }
     }
 
+    private func drawInnerOval(_ rect: CGRect) {
+        arcWidth = rect.width * arcPercentageWidth
+        let innerOvalRect = CGRect(x: arcWidth + arcSpacer,
+                                   y: arcWidth + arcSpacer,
+                                   width: self.bounds.width - (2 * (arcWidth + arcSpacer)) ,
+                                   height: self.bounds.height - (2 * (arcWidth + arcSpacer)))
+        let innerOvalPath = UIBezierPath(ovalIn: innerOvalRect)
+        fillColor.setFill()
+        innerOvalPath.fill()
+    }
 
-    func drawOuterArc() {
-        if (self.layer.sublayers?.count == 1) {
+    private func drawOuterArc() {
+        if (outerArcNotDrawn()) {
             let shapeLayer = CAShapeLayer()
             shapeLayer.path = self.arcPath().cgPath
             shapeLayer.fillColor = UIColor.clear.cgColor
@@ -103,12 +118,14 @@ public class TimerControlView: UIView {
             shapeLayer.lineWidth = arcWidth
             self.pathLayer = shapeLayer;
             self.layer.addSublayer(self.pathLayer)
-        }
-        else {
+        } else {
             self.pathLayer.path = self.arcPath().cgPath
         }
     }
 
+    private func outerArcNotDrawn() -> Bool {
+        self.layer.sublayers?.count == 1
+    }
 
     func startAnimationWithDuration(duration: Int) {
         animateRemaining = true
@@ -149,17 +166,18 @@ public class TimerControlView: UIView {
     }
 
 
-    public func resetOuterArc() {
+
+
+
+    // MARK: Private Methods
+
+    private func resetOuterArc() {
         self.stopTimer()
         self.animateRemaining = false
         self.completionFactor = 0.0
         self.layer.sublayers?.last?.removeFromSuperlayer()
         self.setNeedsDisplay()
     }
-
-
-    // MARK: Private Methods
-
 
     @objc func updateCounter() {
         if (counter == 0) {
@@ -172,7 +190,6 @@ public class TimerControlView: UIView {
         self.delegate?.timerTicked()
         self.counterLabel.text = displaySecondsCount(seconds: counter)
     }
-
 
     @objc func saveStateForApplicationBackGrounding() {
         let remainingTime: Int = counter
