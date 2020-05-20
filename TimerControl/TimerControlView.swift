@@ -25,7 +25,7 @@ public class TimerControlView: UIView {
     var counterLabelTextColor: UIColor = UIColor.white
     var counterLabel = UILabel()
     public var remaingTime: Int = 0
-    public var animateRemaining: Bool = false
+    public var animationCompleted: Bool = true
     var timer = Timer()
     var counter: Int = 0
     var sleepTime: Int = 10 {
@@ -93,7 +93,7 @@ public class TimerControlView: UIView {
         drawInnerOval(rect)
         self.drawOuterArc()
 
-        if(animateRemaining == true) {
+        if(animationCompleted == false) {
             self.startAnimationWithDuration(duration: remaingTime)
         }
     }
@@ -128,7 +128,7 @@ public class TimerControlView: UIView {
     }
 
     func startAnimationWithDuration(duration: Int) {
-        animateRemaining = true
+        animationCompleted = false
         let animation = CABasicAnimation(keyPath: "strokeEnd")
         animation.fromValue = 1.0
         animation.toValue = 0.0
@@ -173,7 +173,7 @@ public class TimerControlView: UIView {
 
     private func resetOuterArc() {
         self.stopTimer()
-        self.animateRemaining = false
+        self.animationCompleted = true
         self.completionFactor = 0.0
         self.layer.sublayers?.last?.removeFromSuperlayer()
         self.setNeedsDisplay()
@@ -217,7 +217,7 @@ public class TimerControlView: UIView {
             let completion = (CGFloat(sleepTime - counter)) / CGFloat(sleepTime)
             self.completionFactor = CGFloat(completion)
             remaingTime = counter
-            animateRemaining = true
+            animationCompleted = false
             self.setNeedsDisplay()
         }
     }
