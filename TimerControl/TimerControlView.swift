@@ -153,7 +153,6 @@ public class TimerControlView: UIView {
         self.stopTimer()
         self.animateRemaining = false
         self.completionFactor = 0.0
-        self.counterLabel.text = "0.0"
         self.layer.sublayers?.last?.removeFromSuperlayer()
         self.setNeedsDisplay()
     }
@@ -210,17 +209,11 @@ public class TimerControlView: UIView {
 
 
     func displaySecondsCount(seconds: Int) -> String {
-        let minutes = seconds / 60
-        let remainingSeconds = seconds % 60
-        return "\(minutes).\(remainingSeconds)"
+        return String(format: "%01i:%02i", (seconds / 60), (seconds % 60))
     }
-
 }
 
-
-
 public protocol TimerControlDelegate: class {
-
     func timerCompleted()  //MJDelegate
     func timerTicked()
 }
