@@ -11,10 +11,10 @@ import UIKit
 public class TimerControlView: UIView {
 
     // MARK: Properties
-    public weak var delegate: TimerControlDelegate?  //MJDelegate
+    public weak var delegate: TimerControlDelegate?
 
     var pathLayer = CAShapeLayer()
-    let π: CGFloat = CGFloat(M_PI)
+    let π: CGFloat = .pi
     let startEndDifferential: CGFloat = 0.0000001
     public var completionFactor: CGFloat = 0.0
     var fillColor: UIColor = UIColor.gray
@@ -163,14 +163,13 @@ public class TimerControlView: UIView {
 
     @objc func updateCounter() {
         if (counter == 0) {
-            self.delegate?.timerCompleted() //MJDelegate
-            counter = sleepTime
+            self.delegate?.timerCompleted()
             timer.invalidate()
             self.resetOuterArc()
             return
         }
         counter -= 1
-        self.delegate?.timerTicked() //MJDelegate
+        self.delegate?.timerTicked()
         self.counterLabel.text = displaySecondsCount(seconds: counter)
     }
 
@@ -186,7 +185,6 @@ public class TimerControlView: UIView {
 
 
     @objc func updateDueToApplicationReturn() {
-        //userDefaults
         let userDefaults = UserDefaults.standard
         let previousNowTime = userDefaults.value(forKey: "nowTime")
         if(previousNowTime != nil) {
@@ -207,13 +205,12 @@ public class TimerControlView: UIView {
         }
     }
 
-
     func displaySecondsCount(seconds: Int) -> String {
         return String(format: "%01i:%02i", (seconds / 60), (seconds % 60))
     }
 }
 
 public protocol TimerControlDelegate: class {
-    func timerCompleted()  //MJDelegate
+    func timerCompleted()
     func timerTicked()
 }
