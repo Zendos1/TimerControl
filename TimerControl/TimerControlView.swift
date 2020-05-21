@@ -12,10 +12,10 @@ public class TimerControlView: UIView {
 
     // MARK: Properties
     public weak var delegate: TimerControlDelegate?
-
     var pathLayer = CAShapeLayer()
-    let π: CGFloat = .pi
+    let arcStartAngle = -CGFloat.pi / 2
     let startEndDifferential: CGFloat = 0.0000001
+    let fullCircleRadians = 2 * CGFloat.pi
     public var completionFactor: CGFloat = 0.0
     var fillColor: UIColor = UIColor.gray
     var arcColor: UIColor = UIColor.blue
@@ -25,7 +25,7 @@ public class TimerControlView: UIView {
     var counterLabelTextColor: UIColor = UIColor.white
     var counterLabel = UILabel()
     public var remaingTime: Int = 0
-    public var animationCompleted: Bool = true
+    public var animateRemainingArc: Bool = false
     var timer = Timer()
     var counter: Int = 0
     var sleepTime: Int = 10 {
