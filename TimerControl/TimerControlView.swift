@@ -9,8 +9,6 @@
 import UIKit
 
 public class TimerControlView: UIView {
-
-    // MARK: Properties
     public weak var delegate: TimerControlDelegate?
     var pathLayer = CAShapeLayer()
     let arcStartAngle = -CGFloat.pi / 2
@@ -239,9 +237,4 @@ extension TimerControlView: CAAnimationDelegate {
         pathLayer = shapeLayer;
         layer.addSublayer(pathLayer)
     }
-}
-
-public protocol TimerControlDelegate: class {
-    func timerCompleted()
-    func timerTicked()
 }
