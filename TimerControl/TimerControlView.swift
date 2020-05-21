@@ -129,9 +129,10 @@ public class TimerControlView: UIView {
         layer.sublayers?.count == 1
     }
 
-    func startAnimationWithDuration(duration: Int) {
-        animationCompleted = false
+    private func startAnimationWithDuration(duration: Int, delegate: CAAnimationDelegate? = nil) {
+        animateRemainingArc = true
         let animation = CABasicAnimation(keyPath: "strokeEnd")
+        animation.delegate = delegate
         animation.fromValue = 1.0
         animation.toValue = 0.0
         animation.duration = CFTimeInterval(duration)
@@ -139,20 +140,14 @@ public class TimerControlView: UIView {
         pathLayer.add(animation, forKey: animation.keyPath)
     }
 
-
-    func arcPath() -> UIBezierPath {
-        let centre = CGPoint(x: self.bounds.width/2, y: self.bounds.height/2)
-        let radius = min(self.bounds.width/2 - arcWidth/2, self.bounds.height/2 - arcWidth/2)
-        let startAngle = (3/2)*π
-        let endAngle = (((3/2) - startEndDifferential)  * π) - (completionFactor * 2 * π)
-        let arcPath = UIBezierPath(arcCenter: centre, radius: radius, startAngle: startAngle, endAngle: endAngle, clockwise:true)
-
+    private func arcPath(endAngle: CGFloat) -> UIBezierPath {
+        let centre = CGPoint(x: bounds.width/2, y: bounds.height/2)
+        let radius = min(bounds.width/2 - arcWidth/2, bounds.height/2 - arcWidth/2)
+        let arcPath = UIBezierPath(arcCenter: centre, radius: radius, startAngle: arcStartAngle, endAngle: endAngle, clockwise:true)
         return arcPath;
     }
 
-
     // MARK: Public API
-
 
     public func startTimer(duration: Int) {
         sleepTime = duration
@@ -162,30 +157,33 @@ public class TimerControlView: UIView {
         startAnimationWithDuration(duration: sleepTime)
     }
 
-
-    public func stopTimer() {
-        self.timer.invalidate()
+    public func stopTimer(animateRemainingArc: Bool = false) {
+        timer.invalidate()
+        resolveOuterArc(animateRemainingArc: animateRemainingArc)
     }
-
-
-
-
 
     // MARK: Private Methods
 
-    private func resetOuterArc() {
-        self.stopTimer()
-        self.animationCompleted = true
-        self.completionFactor = 0.0
-        self.layer.sublayers?.last?.removeFromSuperlayer()
-        self.setNeedsDisplay()
+    private func resolveOuterArc(animateRemainingArc: Bool) {
+        if (animateRemainingArc == false) {
+            completionFactor = 0.0
+            layer.sublayers?.last?.removeFromSuperlayer()
+            setNeedsDisplay()
+        } else {
+            startAnimationForRemainingArc()
+        }
+    }
+
+    private func startAnimationForRemainingArc() {
+        let completedAngle = (1 - (CGFloat(counter)/CGFloat(sleepTime))) * fullCircleRadians
+        drawOuterArc(endAngle: arcStartAngle - startEndDifferential - completedAngle)
+        startAnimationWithDuration(duration: 1, delegate: self)
     }
 
     @objc func updateCounter() {
         if (counter == 0) {
             delegate?.timerCompleted()
             timer.invalidate()
-            self.resetOuterArc()
             return
         }
         counter -= 1
