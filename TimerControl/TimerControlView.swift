@@ -227,6 +227,20 @@ public class TimerControlView: UIView {
     }
 }
 
+extension TimerControlView: CAAnimationDelegate {
+    public func animationDidStop(_ anim: CAAnimation, finished flag: Bool) {
+        layer.sublayers?.last?.removeFromSuperlayer()
+        let endAngle = arcStartAngle - startEndDifferential
+        let shapeLayer = CAShapeLayer()
+        shapeLayer.path = arcPath(endAngle: endAngle).cgPath
+        shapeLayer.fillColor = UIColor.clear.cgColor
+        shapeLayer.strokeColor = arcColor.cgColor
+        shapeLayer.lineWidth = arcWidth
+        pathLayer = shapeLayer;
+        layer.addSublayer(pathLayer)
+    }
+}
+
 public protocol TimerControlDelegate: class {
     func timerCompleted()
     func timerTicked()
