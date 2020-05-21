@@ -92,9 +92,9 @@ public class TimerControlView: UIView {
 
     override public func draw(_ rect: CGRect) {
         drawInnerOval(rect)
-        drawOuterArc(endAngle: arcStartAngle - startEndDifferential - (incompleteTimerPercentage * fullCircleRadians))
+        drawOuterArc(endAngle: arcStartAngle - startEndDifferential - (completedTimerPercentage() * fullCircleRadians))
         if(animateRemainingArc == true) {
-            startAnimationWithDuration(duration: remaingTime)
+            startAnimationWithDuration(duration: sleepCounter)
         }
     }
 
@@ -171,7 +171,7 @@ public class TimerControlView: UIView {
     }
 
     private func startAnimationForRemainingArc() {
-        let completedAngle = (1 - (CGFloat(sleepCounter)/CGFloat(sleepDuration))) * fullCircleRadians
+        let completedAngle = completedTimerPercentage() * fullCircleRadians
         drawOuterArc(endAngle: arcStartAngle - startEndDifferential - completedAngle)
         startAnimationWithDuration(duration: 1, delegate: self)
     }
@@ -188,21 +188,22 @@ public class TimerControlView: UIView {
     }
 
     @objc private func saveStateForApplicationBackGrounding() {
-        UserDefaults.standard.set(sleepCounter, forKey: "SleepDurationRemaining")
-        UserDefaults.standard.set(NSDate(), forKey: "TimeSleepDataCached")
+        UserDefaults.standard.set(sleepCounter, forKey: "SleepCounter")
+        UserDefaults.standard.set(NSDate(), forKey: "CacheTime")
         UserDefaults.standard.synchronize()
     }
 
     @objc private func updateForApplicationForegrounding() {
-        let cacheTime = UserDefaults.standard.value(forKey: "TimeSleepDataCached")
-        guard cacheTime != nil else { return }
-        let intervalTime = NSDate().timeIntervalSince(cacheTime as! Date)
-        let cachedSleepDuration = UserDefaults.standard.value(forKey: "SleepDurationRemaining") as! Double
-        sleepCounter = Int(cachedSleepDuration - intervalTime < 0 ? 0 : cachedSleepDuration - intervalTime)
-        incompleteTimerPercentage = (CGFloat(sleepDuration - sleepCounter)) / CGFloat(sleepDuration)
-        remaingTime = sleepCounter
-        animateRemainingArc = true
-        setNeedsDisplay()
+        guard let cacheTime = UserDefaults.standard.value(forKey: "CacheTime") as? Date,
+            let cachedSleepCounter = UserDefaults.standard.value(forKey: "SleepCounter") as? Double else {
+                return
+        }
+        let intervalTime = NSDate().timeIntervalSince(cacheTime)
+        sleepCounter = cachedSleepCounter - intervalTime < 0 ? 0 : Int(cachedSleepCounter - intervalTime)
+    }
+
+    func completedTimerPercentage() -> CGFloat {
+        return (CGFloat(sleepDuration - sleepCounter)) / CGFloat(sleepDuration)
     }
 
     func displaySecondsCount(seconds: Int) -> String {
@@ -212,6 +213,11 @@ public class TimerControlView: UIView {
 
 extension TimerControlView: CAAnimationDelegate {
     public func animationDidStop(_ anim: CAAnimation, finished flag: Bool) {
+        resetOuterArc()
+        sleepDuration = 0
+    }
+
+    private func resetOuterArc() {
         let endAngle = arcStartAngle - startEndDifferential
         pathLayer.path = arcPath(endAngle: endAngle).cgPath
     }
