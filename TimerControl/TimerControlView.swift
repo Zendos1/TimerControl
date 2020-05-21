@@ -33,8 +33,8 @@ public class TimerControlView: UIView {
             if (sleepTime >= 3600) {
                 sleepTime = 3599
             }
-            self.counterLabel.text = self.displaySecondsCount(seconds: sleepTime)
-            self.counter = sleepTime
+            counterLabel.text = displaySecondsCount(seconds: sleepTime)
+            counter = sleepTime
         }
     }
 
@@ -68,7 +68,7 @@ public class TimerControlView: UIView {
         counterLabel.textAlignment = NSTextAlignment.center
         counterLabel.textColor = counterLabelTextColor
         counterLabel.translatesAutoresizingMaskIntoConstraints = false
-        self.addSubview(counterLabel)
+        addSubview(counterLabel)
         let centreX = NSLayoutConstraint(item: counterLabel,
                                          attribute: .centerX,
                                          relatedBy: .equal,
@@ -83,18 +83,17 @@ public class TimerControlView: UIView {
                                          attribute: .centerY,
                                          multiplier: 1.5,
                                          constant: 0)
-        self.addConstraints([centreX, centreY])
-        self.counterLabel.text = self.displaySecondsCount(seconds: 0)
+        addConstraints([centreX, centreY])
+        counterLabel.text = displaySecondsCount(seconds: 0)
     }
 
     // MARK: Draw
 
     override public func draw(_ rect: CGRect) {
         drawInnerOval(rect)
-        self.drawOuterArc()
-
-        if(animationCompleted == false) {
-            self.startAnimationWithDuration(duration: remaingTime)
+        drawOuterArc(endAngle: arcStartAngle - startEndDifferential - (completionFactor * fullCircleRadians))
+        if(animateRemainingArc == true) {
+            startAnimationWithDuration(duration: remaingTime)
         }
     }
 
@@ -102,29 +101,29 @@ public class TimerControlView: UIView {
         arcWidth = rect.width * arcPercentageWidth
         let innerOvalRect = CGRect(x: arcWidth + arcSpacer,
                                    y: arcWidth + arcSpacer,
-                                   width: self.bounds.width - (2 * (arcWidth + arcSpacer)) ,
-                                   height: self.bounds.height - (2 * (arcWidth + arcSpacer)))
+                                   width: bounds.width - (2 * (arcWidth + arcSpacer)) ,
+                                   height: bounds.height - (2 * (arcWidth + arcSpacer)))
         let innerOvalPath = UIBezierPath(ovalIn: innerOvalRect)
         fillColor.setFill()
         innerOvalPath.fill()
     }
 
-    private func drawOuterArc() {
+    private func drawOuterArc(endAngle: CGFloat) {
         if (outerArcNotDrawn()) {
             let shapeLayer = CAShapeLayer()
-            shapeLayer.path = self.arcPath().cgPath
+            shapeLayer.path = arcPath(endAngle: endAngle).cgPath
             shapeLayer.fillColor = UIColor.clear.cgColor
-            shapeLayer.strokeColor = self.arcColor.cgColor
+            shapeLayer.strokeColor = arcColor.cgColor
             shapeLayer.lineWidth = arcWidth
-            self.pathLayer = shapeLayer;
-            self.layer.addSublayer(self.pathLayer)
+            pathLayer = shapeLayer;
+            layer.addSublayer(pathLayer)
         } else {
-            self.pathLayer.path = self.arcPath().cgPath
+            pathLayer.path = arcPath(endAngle: endAngle).cgPath
         }
     }
 
     private func outerArcNotDrawn() -> Bool {
-        self.layer.sublayers?.count == 1
+        layer.sublayers?.count == 1
     }
 
     func startAnimationWithDuration(duration: Int) {
@@ -134,7 +133,7 @@ public class TimerControlView: UIView {
         animation.toValue = 0.0
         animation.duration = CFTimeInterval(duration)
         animation.fillMode = CAMediaTimingFillMode.both
-        self.pathLayer.add(animation, forKey: animation.keyPath)
+        pathLayer.add(animation, forKey: animation.keyPath)
     }
 
 
@@ -157,7 +156,7 @@ public class TimerControlView: UIView {
         counter = sleepTime
         timer.invalidate()
         timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(updateCounter), userInfo: nil, repeats: true)
-        self.startAnimationWithDuration(duration: sleepTime)
+        startAnimationWithDuration(duration: sleepTime)
     }
 
 
@@ -181,14 +180,14 @@ public class TimerControlView: UIView {
 
     @objc func updateCounter() {
         if (counter == 0) {
-            self.delegate?.timerCompleted()
+            delegate?.timerCompleted()
             timer.invalidate()
             self.resetOuterArc()
             return
         }
         counter -= 1
-        self.delegate?.timerTicked()
-        self.counterLabel.text = displaySecondsCount(seconds: counter)
+        delegate?.timerTicked()
+        counterLabel.text = displaySecondsCount(seconds: counter)
     }
 
     @objc func saveStateForApplicationBackGrounding() {
@@ -215,10 +214,10 @@ public class TimerControlView: UIView {
             counter = Int(updatedRemainingTime)
 
             let completion = (CGFloat(sleepTime - counter)) / CGFloat(sleepTime)
-            self.completionFactor = CGFloat(completion)
+            completionFactor = CGFloat(completion)
             remaingTime = counter
-            animationCompleted = false
-            self.setNeedsDisplay()
+            animateRemainingArc = true
+            setNeedsDisplay()
         }
     }
 
