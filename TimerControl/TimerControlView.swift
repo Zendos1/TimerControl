@@ -43,6 +43,9 @@ public class TimerControlView: UIView {
     // create protocol and postNotifications to protocol methods for timerEnd & timer Start
     // Width constraints are explicit on graphView UIView - need these to adjust to the parent view.
     // Build to a cocoapod for inclusion to radio app
+    // Extract values to a constants file
+    // Guarantee 1:1 UIView setup
+
     // MARK: Init
 
 
