@@ -41,14 +41,24 @@ public class TimerControlView: UIView {
     // Extract values to a constants file
     // Guarantee 1:1 UIView setup
 
-    // MARK: Init
 
 
-    required public init(coder aDecoder: NSCoder) {
-        super.init(coder: aDecoder)!
-        setupApplicationStateObservers()
-        setupCounterLabel()
+    // MARK: Public API
+
+    public func startTimer(duration: Int) {
+        sleepDuration = duration
+        sleepCounter = sleepDuration
+        timer.invalidate()
+        timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(updateCounter), userInfo: nil, repeats: true)
+        startAnimationWithDuration(duration: sleepDuration)
     }
+
+    public func stopTimer() {
+        timer.invalidate()
+        startAnimationForRemainingArc()
+    }
+
+    // MARK: Notification Observers
 
     private func setupApplicationStateObservers() {
         NotificationCenter.default.addObserver(self,
@@ -59,6 +69,23 @@ public class TimerControlView: UIView {
                                                selector: #selector(saveStateForApplicationBackGrounding),
                                                name: UIApplication.didEnterBackgroundNotification,
                                                object: nil)
+    }
+
+    @objc private func saveStateForApplicationBackGrounding() {
+        cacheTimerStateToUserDefaults()
+        removeOuterArc()
+    }
+
+    @objc private func updateForApplicationWillForeground() {
+        retrieveTimerStateFromUserDefaults()
+    }
+
+    // MARK: View
+
+    required public init(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)!
+        setupApplicationStateObservers()
+        setupCounterLabel()
     }
 
     private func setupCounterLabel() {
@@ -84,8 +111,6 @@ public class TimerControlView: UIView {
         addConstraints([centreX, centreY])
         counterLabel.text = displaySecondsCount(seconds: 0)
     }
-
-    // MARK: Draw
 
     override public func draw(_ rect: CGRect) {
         drawInnerOval(rect)
@@ -142,26 +167,21 @@ public class TimerControlView: UIView {
         return arcPath;
     }
 
-    // MARK: Public API
-
-    public func startTimer(duration: Int) {
-        sleepDuration = duration
-        sleepCounter = sleepDuration
-        timer.invalidate()
-        timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(updateCounter), userInfo: nil, repeats: true)
-        startAnimationWithDuration(duration: sleepDuration)
-    }
-
-    public func stopTimer() {
-        timer.invalidate()
-        startAnimationForRemainingArc()
-    }
-
     private func startAnimationForRemainingArc() {
         let completedAngle = completedTimerPercentage() * fullCircleRadians
         drawOuterArc(endAngle: arcStartAngle - startEndDifferential - completedAngle)
         startAnimationWithDuration(duration: 1, delegate: self)
     }
+
+    private func removeOuterArc() {
+        layer.sublayers?.last?.removeFromSuperlayer()
+    }
+
+    func displaySecondsCount(seconds: Int) -> String {
+        return String(format: "%01i:%02i", (seconds / 60), (seconds % 60))
+    }
+
+    // MARK: Business logic
 
     @objc private func updateCounter() {
         if (sleepCounter == 0) {
@@ -172,23 +192,6 @@ public class TimerControlView: UIView {
         sleepCounter -= 1
         delegate?.timerTicked()
         counterLabel.text = displaySecondsCount(seconds: sleepCounter)
-    }
-
-    @objc private func saveStateForApplicationBackGrounding() {
-        cacheTimerStateToUserDefaults()
-        layer.sublayers?.last?.removeFromSuperlayer()
-    }
-
-    @objc private func updateForApplicationWillForeground() {
-        guard let cacheTime = UserDefaults.standard.value(forKey: "CacheTime") as? Date,
-            let cachedSleepDuration = UserDefaults.standard.value(forKey: "SleepDuration") as? Double,
-            let cachedSleepCounter = UserDefaults.standard.value(forKey: "SleepCounter") as? Double else {
-                return
-        }
-        let intervalTime = NSDate().timeIntervalSince(cacheTime)
-        sleepCounter = cachedSleepCounter - intervalTime < 0 ? 0 : Int(cachedSleepCounter - intervalTime)
-        sleepDuration = Int(cachedSleepDuration)
-        animateRemainingArc = true
     }
 
     private func cacheTimerStateToUserDefaults() {
@@ -212,10 +215,6 @@ public class TimerControlView: UIView {
 
     func completedTimerPercentage() -> CGFloat {
         return (CGFloat(sleepDuration - sleepCounter)) / CGFloat(sleepDuration)
-    }
-
-    func displaySecondsCount(seconds: Int) -> String {
-        return String(format: "%01i:%02i", (seconds / 60), (seconds % 60))
     }
 }
 
