@@ -10,11 +10,14 @@ import UIKit
 
 public class TimerControlView: UIView {
     public weak var delegate: TimerControlDelegate?
+
+
     let arcStartAngle = -CGFloat.pi / 2
     let startEndDifferential: CGFloat = 0.0000001
     let fullCircleRadians = 2 * CGFloat.pi
-    var innerOvalColor: UIColor = UIColor.gray
-    var arcColor: UIColor = UIColor.blue
+
+    var innerColor: UIColor = UIColor.gray
+    var outerColor: UIColor = UIColor.blue
     var arcPercentageWidth: CGFloat = 0.04
     let arcSpacer: CGFloat = 1.0
     var counterLabelTextColor: UIColor = UIColor.white
@@ -32,10 +35,8 @@ public class TimerControlView: UIView {
     }
 
     // MARK: TODO
-    // possibly remove the CAShapelayer from the view on applicationEnterBackGround then redraw effect on forgrounding
     // create protocol and postNotifications to protocol methods for timerEnd & timer Start
     // Width constraints are explicit on graphView UIView - need these to adjust to the parent view.
-    // Build to a cocoapod for inclusion to radio app
     // Extract values to a constants file
     // Guarantee 1:1 UIView setup
 
@@ -51,6 +52,16 @@ public class TimerControlView: UIView {
 
     // MARK: Public API
 
+    public func configureTimerControl(innerColor: UIColor = .gray,
+                                      outerColor: UIColor = .blue,
+                                      counterTextColor: UIColor = .white,
+                                      arcPercentageWidth: CGFloat = 0.04) {
+        self.innerColor = innerColor
+        self.outerColor = outerColor
+        self.counterLabelTextColor = counterTextColor
+        self.arcPercentageWidth = arcPercentageWidth
+    }
+
     public func startTimer(duration: Int) {
         sleepDuration = duration
         sleepCounter = sleepDuration
@@ -60,7 +71,7 @@ public class TimerControlView: UIView {
     }
 
     public func stopTimer() {
-        timer.invalidate() // timer = nil
+        timer.invalidate()
         stopTimerAnimation()
     }
 
@@ -148,7 +159,7 @@ public class TimerControlView: UIView {
                                    width: bounds.width - (2 * (arcWidth(rect) + arcSpacer)) ,
                                    height: bounds.height - (2 * (arcWidth(rect) + arcSpacer)))
         let innerOvalPath = UIBezierPath(ovalIn: innerOvalRect)
-        innerOvalColor.setFill()
+        innerColor.setFill()
         innerOvalPath.fill()
     }
 
@@ -159,7 +170,7 @@ public class TimerControlView: UIView {
             let shapeLayer = CAShapeLayer()
             shapeLayer.path = arcPath(rect).cgPath
             shapeLayer.fillColor = UIColor.clear.cgColor
-            shapeLayer.strokeColor = arcColor.cgColor
+            shapeLayer.strokeColor = outerColor.cgColor
             shapeLayer.lineWidth = rect.width * arcPercentageWidth
             layer.addSublayer(shapeLayer)
         }
@@ -218,8 +229,6 @@ public class TimerControlView: UIView {
         return String(format: "%01i:%02i", (seconds / 60), (seconds % 60))
     }
 
-    // MARK: Business logic
-
     @objc private func updateCounter() {
         if (sleepCounter == 0) {
             delegate?.timerCompleted()
@@ -240,6 +249,7 @@ public class TimerControlView: UIView {
 
 extension TimerControlView: CAAnimationDelegate {
     public func animationDidStop(_ anim: CAAnimation, finished flag: Bool) {
+        guard flag == true else { return }
         resetTimerState()
         drawOuterArc(bounds)
     }
