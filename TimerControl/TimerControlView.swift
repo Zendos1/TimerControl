@@ -10,21 +10,19 @@ import UIKit
 
 public class TimerControlView: UIView {
     public weak var delegate: TimerControlDelegate?
-    var pathLayer = CAShapeLayer()
     let arcStartAngle = -CGFloat.pi / 2
     let startEndDifferential: CGFloat = 0.0000001
     let fullCircleRadians = 2 * CGFloat.pi
-    var fillColor: UIColor = UIColor.gray
+    var innerOvalColor: UIColor = UIColor.gray
     var arcColor: UIColor = UIColor.blue
     var arcPercentageWidth: CGFloat = 0.04
-    var arcWidth: CGFloat = 0
     let arcSpacer: CGFloat = 1.0
     var counterLabelTextColor: UIColor = UIColor.white
     var counterLabel = UILabel()
     public var animateRemainingArc: Bool = false
     var timer = Timer()
     var sleepCounter: Int = 0
-    var sleepDuration: Int = 10 {
+    var sleepDuration: Int = 0 {
         didSet {
             if (sleepDuration >= 3600) {
                 sleepDuration = 3599
@@ -43,6 +41,14 @@ public class TimerControlView: UIView {
 
 
 
+    // MARK: Init
+
+    required public init(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)!
+        setupApplicationStateObservers()
+        setupCounterLabel()
+    }
+
     // MARK: Public API
 
     public func startTimer(duration: Int) {
@@ -50,43 +56,59 @@ public class TimerControlView: UIView {
         sleepCounter = sleepDuration
         timer.invalidate()
         timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(updateCounter), userInfo: nil, repeats: true)
-        startAnimationWithDuration(duration: sleepDuration)
+        animateArcWithDuration(duration: sleepDuration)
     }
 
     public func stopTimer() {
-        timer.invalidate()
-        startAnimationForRemainingArc()
+        timer.invalidate() // timer = nil
+        stopTimerAnimation()
     }
 
     // MARK: Notification Observers
 
     private func setupApplicationStateObservers() {
         NotificationCenter.default.addObserver(self,
-                                               selector: #selector(updateForApplicationWillForeground),
+                                               selector: #selector(handleApplicationWillForeground),
                                                name: UIApplication.willEnterForegroundNotification,
                                                object: nil)
         NotificationCenter.default.addObserver(self,
-                                               selector: #selector(saveStateForApplicationBackGrounding),
+                                               selector: #selector(handleApplicationBackGrounding),
                                                name: UIApplication.didEnterBackgroundNotification,
                                                object: nil)
     }
 
-    @objc private func saveStateForApplicationBackGrounding() {
+    @objc private func handleApplicationBackGrounding() {
         cacheTimerStateToUserDefaults()
-        removeOuterArc()
+        removeArcLayer()
     }
 
-    @objc private func updateForApplicationWillForeground() {
+    @objc private func handleApplicationWillForeground() {
         retrieveTimerStateFromUserDefaults()
     }
 
-    // MARK: View
-
-    required public init(coder aDecoder: NSCoder) {
-        super.init(coder: aDecoder)!
-        setupApplicationStateObservers()
-        setupCounterLabel()
+    private func cacheTimerStateToUserDefaults() {
+        UserDefaults.standard.set(NSDate(), forKey: "CacheTime")
+        UserDefaults.standard.set(sleepDuration, forKey: "SleepDuration")
+        UserDefaults.standard.set(sleepCounter, forKey: "SleepCounter")
+        UserDefaults.standard.synchronize()
     }
+
+    private func retrieveTimerStateFromUserDefaults() {
+        guard let cacheTime = UserDefaults.standard.value(forKey: "CacheTime") as? Date,
+            let cachedSleepDuration = UserDefaults.standard.value(forKey: "SleepDuration") as? Double,
+            let cachedSleepCounter = UserDefaults.standard.value(forKey: "SleepCounter") as? Double else {
+                return
+        }
+        let backgroundedTime = NSDate().timeIntervalSince(cacheTime)
+        if (cachedSleepCounter - backgroundedTime < 0) {
+            resetTimerState()
+        } else {
+            sleepCounter = Int(cachedSleepCounter - backgroundedTime)
+            sleepDuration = Int(cachedSleepDuration)
+        }
+    }
+
+    // MARK: View
 
     private func setupCounterLabel() {
         counterLabel = UILabel(frame: CGRect(x: 0, y: 0, width: 0, height: 0))
@@ -114,66 +136,81 @@ public class TimerControlView: UIView {
 
     override public func draw(_ rect: CGRect) {
         drawInnerOval(rect)
-        drawOuterArc(endAngle: arcStartAngle - startEndDifferential - (completedTimerPercentage() * fullCircleRadians))
-        if(animateRemainingArc == true) {
-            startAnimationWithDuration(duration: sleepCounter, delegate: self)
+        drawOuterArc(rect)
+        if(sleepDuration > 0) {
+            animateArcWithDuration(duration: sleepCounter, delegate: self)
         }
     }
 
     private func drawInnerOval(_ rect: CGRect) {
-        arcWidth = rect.width * arcPercentageWidth
-        let innerOvalRect = CGRect(x: arcWidth + arcSpacer,
-                                   y: arcWidth + arcSpacer,
-                                   width: bounds.width - (2 * (arcWidth + arcSpacer)) ,
-                                   height: bounds.height - (2 * (arcWidth + arcSpacer)))
+        let innerOvalRect = CGRect(x: arcWidth(rect) + arcSpacer,
+                                   y: arcWidth(rect) + arcSpacer,
+                                   width: bounds.width - (2 * (arcWidth(rect) + arcSpacer)) ,
+                                   height: bounds.height - (2 * (arcWidth(rect) + arcSpacer)))
         let innerOvalPath = UIBezierPath(ovalIn: innerOvalRect)
-        fillColor.setFill()
+        innerOvalColor.setFill()
         innerOvalPath.fill()
     }
 
-    private func drawOuterArc(endAngle: CGFloat) {
-        if (outerArcNotDrawn()) {
+    private func drawOuterArc(_ rect: CGRect) {
+        if (isOuterArcDrawn()) {
+            arcLayer()?.path = arcPath(rect).cgPath
+        } else {
             let shapeLayer = CAShapeLayer()
-            shapeLayer.path = arcPath(endAngle: endAngle).cgPath
+            shapeLayer.path = arcPath(rect).cgPath
             shapeLayer.fillColor = UIColor.clear.cgColor
             shapeLayer.strokeColor = arcColor.cgColor
-            shapeLayer.lineWidth = arcWidth
-            pathLayer = shapeLayer;
-            layer.addSublayer(pathLayer)
-        } else {
-            pathLayer.path = arcPath(endAngle: endAngle).cgPath
+            shapeLayer.lineWidth = rect.width * arcPercentageWidth
+            layer.addSublayer(shapeLayer)
         }
     }
 
-    private func outerArcNotDrawn() -> Bool {
-        layer.sublayers?.count == 1
+    private func arcEndAngle() -> CGFloat {
+        return arcStartAngle - startEndDifferential - (completedTimerPercentage() * fullCircleRadians)
     }
 
-    private func startAnimationWithDuration(duration: Int, delegate: CAAnimationDelegate? = nil) {
-        animateRemainingArc = true
+    private func arcLayer() -> CAShapeLayer? {
+        return layer.sublayers?[1] as? CAShapeLayer
+    }
+
+    private func isOuterArcDrawn() -> Bool {
+        guard let subLayerCount = layer.sublayers?.count else { return false }
+        return subLayerCount > [counterLabel].count
+    }
+
+    private func arcWidth(_ rect: CGRect) -> CGFloat {
+        return rect.width * arcPercentageWidth
+    }
+
+    private func animateArcWithDuration(duration: Int, delegate: CAAnimationDelegate? = nil) {
         let animation = CABasicAnimation(keyPath: "strokeEnd")
         animation.delegate = delegate
         animation.fromValue = 1.0
         animation.toValue = 0.0
         animation.duration = CFTimeInterval(duration)
         animation.fillMode = CAMediaTimingFillMode.both
-        pathLayer.add(animation, forKey: animation.keyPath)
+        arcLayer()?.add(animation, forKey: animation.keyPath) // cache the animation.keyPath and remove the animation on each new call to this method
     }
 
-    private func arcPath(endAngle: CGFloat) -> UIBezierPath {
+    private func arcPath(_ rect: CGRect) -> UIBezierPath {
         let centre = CGPoint(x: bounds.width/2, y: bounds.height/2)
-        let radius = min(bounds.width/2 - arcWidth/2, bounds.height/2 - arcWidth/2)
-        let arcPath = UIBezierPath(arcCenter: centre, radius: radius, startAngle: arcStartAngle, endAngle: endAngle, clockwise:true)
+        let radius = min(bounds.width/2 - arcWidth(rect)/2, bounds.height/2 - arcWidth(rect)/2)
+        let arcPath = UIBezierPath(arcCenter: centre, radius: radius, startAngle: arcStartAngle, endAngle: arcEndAngle(), clockwise:true)
         return arcPath;
     }
 
-    private func startAnimationForRemainingArc() {
-        let completedAngle = completedTimerPercentage() * fullCircleRadians
-        drawOuterArc(endAngle: arcStartAngle - startEndDifferential - completedAngle)
-        startAnimationWithDuration(duration: 1, delegate: self)
+    private func stopTimerAnimation() {
+        drawOuterArc(bounds)
+        animateArcWithDuration(duration: 1, delegate: self)
+        resetTimerState()
     }
 
-    private func removeOuterArc() {
+    private func resetTimerState() {
+        sleepDuration = 0
+        sleepCounter = 0
+    }
+
+    private func removeArcLayer() {
         layer.sublayers?.last?.removeFromSuperlayer()
     }
 
@@ -187,6 +224,7 @@ public class TimerControlView: UIView {
         if (sleepCounter == 0) {
             delegate?.timerCompleted()
             timer.invalidate()
+            resetTimerState()
             return
         }
         sleepCounter -= 1
@@ -194,38 +232,15 @@ public class TimerControlView: UIView {
         counterLabel.text = displaySecondsCount(seconds: sleepCounter)
     }
 
-    private func cacheTimerStateToUserDefaults() {
-        UserDefaults.standard.set(NSDate(), forKey: "CacheTime")
-        UserDefaults.standard.set(sleepDuration, forKey: "SleepDuration")
-        UserDefaults.standard.set(sleepCounter, forKey: "SleepCounter")
-        UserDefaults.standard.synchronize()
-    }
-
-    private func retrieveTimerStateFromUserDefaults() {
-        guard let cacheTime = UserDefaults.standard.value(forKey: "CacheTime") as? Date,
-            let cachedSleepDuration = UserDefaults.standard.value(forKey: "SleepDuration") as? Double,
-            let cachedSleepCounter = UserDefaults.standard.value(forKey: "SleepCounter") as? Double else {
-                return
-        }
-        let intervalTime = NSDate().timeIntervalSince(cacheTime)
-        sleepCounter = cachedSleepCounter - intervalTime < 0 ? 0 : Int(cachedSleepCounter - intervalTime)
-        sleepDuration = Int(cachedSleepDuration)
-        animateRemainingArc = true
-    }
-
-    func completedTimerPercentage() -> CGFloat {
+    private func completedTimerPercentage() -> CGFloat {
+        guard sleepDuration > 0 else { return 0.0 }
         return (CGFloat(sleepDuration - sleepCounter)) / CGFloat(sleepDuration)
     }
 }
 
 extension TimerControlView: CAAnimationDelegate {
     public func animationDidStop(_ anim: CAAnimation, finished flag: Bool) {
-        resetOuterArc()
-        sleepDuration = 0
-    }
-
-    private func resetOuterArc() {
-        let endAngle = arcStartAngle - startEndDifferential
-        pathLayer.path = arcPath(endAngle: endAngle).cgPath
+        resetTimerState()
+        drawOuterArc(bounds)
     }
 }
