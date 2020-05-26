@@ -22,7 +22,6 @@ public class TimerControlView: UIView {
     let arcSpacer: CGFloat = 1.0
     var counterLabelTextColor: UIColor = UIColor.white
     var counterLabel = UILabel()
-    public var animateRemainingArc: Bool = false
     var timer = Timer()
     var sleepCounter: Int = 0
     var sleepDuration: Int = 0 {
@@ -149,7 +148,7 @@ public class TimerControlView: UIView {
         drawInnerOval(rect)
         drawOuterArc(rect)
         if(sleepDuration > 0) {
-            animateArcWithDuration(duration: sleepCounter, delegate: self)
+            animateArcWithDuration(duration: sleepCounter)
         }
     }
 
@@ -186,21 +185,20 @@ public class TimerControlView: UIView {
 
     private func isOuterArcDrawn() -> Bool {
         guard let subLayerCount = layer.sublayers?.count else { return false }
-        return subLayerCount > [counterLabel].count
+        return subLayerCount > [counterLabel.layer].count
     }
 
     private func arcWidth(_ rect: CGRect) -> CGFloat {
         return rect.width * arcPercentageWidth
     }
 
-    private func animateArcWithDuration(duration: Int, delegate: CAAnimationDelegate? = nil) {
+    private func animateArcWithDuration(duration: Int) {
         let animation = CABasicAnimation(keyPath: "strokeEnd")
-        animation.delegate = delegate
+        animation.delegate = self
         animation.fromValue = 1.0
         animation.toValue = 0.0
         animation.duration = CFTimeInterval(duration)
-        animation.fillMode = CAMediaTimingFillMode.both
-        arcLayer()?.add(animation, forKey: animation.keyPath) // cache the animation.keyPath and remove the animation on each new call to this method
+        arcLayer()?.add(animation, forKey: nil)
     }
 
     private func arcPath(_ rect: CGRect) -> UIBezierPath {
@@ -212,7 +210,7 @@ public class TimerControlView: UIView {
 
     private func stopTimerAnimation() {
         drawOuterArc(bounds)
-        animateArcWithDuration(duration: 1, delegate: self)
+        animateArcWithDuration(duration: 1)
         resetTimerState()
     }
 
