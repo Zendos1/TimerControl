@@ -198,7 +198,7 @@ public class TimerControlView: UIView {
         animation.fromValue = 1.0
         animation.toValue = 0.0
         animation.duration = CFTimeInterval(duration)
-        arcLayer()?.add(animation, forKey: nil)
+        arcLayer()?.add(animation, forKey: animation.keyPath)
     }
 
     private func arcPath(_ rect: CGRect) -> UIBezierPath {
