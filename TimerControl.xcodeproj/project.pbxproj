@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		B07160F82476BB50005C6AFF /* TimerControlDelegateProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = B07160F72476BB50005C6AFF /* TimerControlDelegateProtocol.swift */; };
+		B09B2CF3247EB519004AA264 /* TimerDashPattern.swift in Sources */ = {isa = PBXBuildFile; fileRef = B09B2CF2247EB519004AA264 /* TimerDashPattern.swift */; };
 		B0D88CCB246EEC6900083617 /* TimerControl.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B0D88CC1246EEC6900083617 /* TimerControl.framework */; };
 		B0D88CD0246EEC6900083617 /* TimerControlTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0D88CCF246EEC6900083617 /* TimerControlTests.swift */; };
 		B0D88CD2246EEC6900083617 /* TimerControl.h in Headers */ = {isa = PBXBuildFile; fileRef = B0D88CC4246EEC6900083617 /* TimerControl.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -40,6 +41,7 @@
 
 /* Begin PBXFileReference section */
 		B07160F72476BB50005C6AFF /* TimerControlDelegateProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerControlDelegateProtocol.swift; sourceTree = "<group>"; };
+		B09B2CF2247EB519004AA264 /* TimerDashPattern.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerDashPattern.swift; sourceTree = "<group>"; };
 		B0D88CC1246EEC6900083617 /* TimerControl.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = TimerControl.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B0D88CC4246EEC6900083617 /* TimerControl.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TimerControl.h; sourceTree = "<group>"; };
 		B0D88CC5246EEC6900083617 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -90,6 +92,7 @@
 			isa = PBXGroup;
 			children = (
 				B0D88CC4246EEC6900083617 /* TimerControl.h */,
+				B09B2CF2247EB519004AA264 /* TimerDashPattern.swift */,
 				B0D88CDB246EED3400083617 /* TimerControlView.swift */,
 				B07160F72476BB50005C6AFF /* TimerControlDelegateProtocol.swift */,
 				B0D88CC5246EEC6900083617 /* Info.plist */,
@@ -217,6 +220,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B09B2CF3247EB519004AA264 /* TimerDashPattern.swift in Sources */,
 				B0D88CDC246EED3400083617 /* TimerControlView.swift in Sources */,
 				B07160F82476BB50005C6AFF /* TimerControlDelegateProtocol.swift in Sources */,
 			);

@@ -16,11 +16,12 @@ public class TimerControlView: UIView {
     let startEndDifferential: CGFloat = 0.0000001
     let fullCircleRadians = 2 * CGFloat.pi
 
+    var arcDashPattern: TimerDashPattern = .none
     var innerColor: UIColor = UIColor.gray
     var outerColor: UIColor = UIColor.blue
     var arcPercentageWidth: CGFloat = 0.04
     let arcSpacer: CGFloat = 1.0
-    var counterLabelTextColor: UIColor = UIColor.white
+    var counterLabelTextColor = UIColor.white
     var counterLabel = UILabel()
     var timer = Timer()
     var sleepCounter: Int = 0
@@ -54,18 +55,24 @@ public class TimerControlView: UIView {
     public func configureTimerControl(innerColor: UIColor = .gray,
                                       outerColor: UIColor = .blue,
                                       counterTextColor: UIColor = .white,
-                                      arcPercentageWidth: CGFloat = 0.04) {
+                                      arcPercentageWidth: CGFloat = 0.04,
+                                      arcDashPattern: TimerDashPattern = .none) {
         self.innerColor = innerColor
         self.outerColor = outerColor
         self.counterLabelTextColor = counterTextColor
         self.arcPercentageWidth = arcPercentageWidth
+        self.arcDashPattern = arcDashPattern
     }
 
     public func startTimer(duration: Int) {
         sleepDuration = duration
         sleepCounter = sleepDuration
         timer.invalidate()
-        timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(updateCounter), userInfo: nil, repeats: true)
+        timer = Timer.scheduledTimer(timeInterval: 1,
+                                     target: self,
+                                     selector: #selector(updateCounter),
+                                     userInfo: nil,
+                                     repeats: true)
         animateArcWithDuration(duration: sleepDuration)
     }
 
@@ -171,7 +178,21 @@ public class TimerControlView: UIView {
             shapeLayer.fillColor = UIColor.clear.cgColor
             shapeLayer.strokeColor = outerColor.cgColor
             shapeLayer.lineWidth = rect.width * arcPercentageWidth
+            shapeLayer.lineDashPattern = configureDashPattern(arcDashPattern)
             layer.addSublayer(shapeLayer)
+        }
+    }
+
+    private func configureDashPattern(_ pattern: TimerDashPattern) -> [NSNumber] {
+        switch pattern {
+        case .narrow:
+            return [2, 1]
+        case .medium:
+            return [4, 1]
+        case .wide:
+            return [6, 1]
+        default:
+            return []
         }
     }
 
