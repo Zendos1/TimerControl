@@ -16,6 +16,7 @@ public class TimerControlView: UIView {
     let startEndDifferential: CGFloat = 0.0000001
     let fullCircleRadians = 2 * CGFloat.pi
 
+    let arcLayerID = "arcLayer"
     var arcDashPattern: TimerDashPattern = .none
     var innerColor: UIColor = UIColor.gray
     var outerColor: UIColor = UIColor.blue
@@ -179,6 +180,7 @@ public class TimerControlView: UIView {
             shapeLayer.strokeColor = outerColor.cgColor
             shapeLayer.lineWidth = rect.width * arcPercentageWidth
             shapeLayer.lineDashPattern = configureDashPattern(arcDashPattern)
+            shapeLayer.name = arcLayerID
             layer.addSublayer(shapeLayer)
         }
     }
@@ -201,12 +203,9 @@ public class TimerControlView: UIView {
     }
 
     private func arcLayer() -> CAShapeLayer? {
-        return layer.sublayers?[1] as? CAShapeLayer
-    }
-
-    private func isOuterArcDrawn() -> Bool {
-        guard let subLayerCount = layer.sublayers?.count else { return false }
-        return subLayerCount > [counterLabel.layer].count
+        return layer.sublayers?.compactMap({ sublayer in
+            sublayer.name == arcLayerID ? sublayer as? CAShapeLayer : nil
+        }).first
     }
 
     private func arcWidth(_ rect: CGRect) -> CGFloat {
