@@ -240,7 +240,11 @@ public class TimerControlView: UIView {
     }
 
     private func removeArcLayer() {
-        layer.sublayers?.last?.removeFromSuperlayer()
+        for (index, sublayer) in layer.sublayers!.enumerated() {
+            if sublayer.name == arcLayerID {
+                layer.sublayers?.remove(at: index)
+            }
+        }
     }
 
     func displaySecondsCount(seconds: Int) -> String {
