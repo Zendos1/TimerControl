@@ -1,5 +1,5 @@
 //
-//  TimerDashPattern.swift
+//  TimerControlDashPattern.swift
 //  TimerControl
 //
 //  Created by mark jones on 27/05/2020.
@@ -7,7 +7,7 @@
 //
 
 /// enum describing available dash patterns for outer arc
-public enum TimerDashPattern {
+public enum TimerControlDashPattern {
     case none
     case narrow
     case medium

@@ -1,5 +1,5 @@
 //
-//  TimerControlDelegateProtocol.swift
+//  TimerControlDelegate.swift
 //  TimerControl
 //
 //  Created by mark jones on 21/05/2020.
