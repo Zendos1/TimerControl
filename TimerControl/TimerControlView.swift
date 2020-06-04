@@ -171,9 +171,7 @@ public class TimerControlView: UIView {
     }
 
     private func drawOuterArc(_ rect: CGRect) {
-        if (isOuterArcDrawn()) {
-            arcLayer()?.path = arcPath(rect).cgPath
-        } else {
+        guard let arclayer = arcLayer() else {
             let shapeLayer = CAShapeLayer()
             shapeLayer.path = arcPath(rect).cgPath
             shapeLayer.fillColor = UIColor.clear.cgColor
@@ -182,7 +180,9 @@ public class TimerControlView: UIView {
             shapeLayer.lineDashPattern = configureDashPattern(arcDashPattern)
             shapeLayer.name = arcLayerID
             layer.addSublayer(shapeLayer)
+            return
         }
+        arclayer.path = arcPath(rect).cgPath
     }
 
     private func configureDashPattern(_ pattern: TimerDashPattern) -> [NSNumber] {
