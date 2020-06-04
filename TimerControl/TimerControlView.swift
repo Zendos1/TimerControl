@@ -95,7 +95,7 @@ public class TimerControlView: UIView {
 
     @objc private func handleApplicationBackGrounding() {
         cacheTimerStateToUserDefaults()
-        removeArcLayer()
+        prepareArclayerForRedraw()
     }
 
     @objc private func handleApplicationWillForeground() {
@@ -221,7 +221,7 @@ public class TimerControlView: UIView {
         animation.fromValue = 1.0
         animation.toValue = 0.0
         animation.duration = CFTimeInterval(duration)
-        arcLayer()?.add(animation, forKey: animation.keyPath)
+        arcLayer()?.add(animation, forKey: TimerControlConstants.arcLayerAnimationID)
     }
 
     private func arcPath(_ rect: CGRect) -> UIBezierPath {
@@ -246,12 +246,9 @@ public class TimerControlView: UIView {
         sleepCounter = 0
     }
 
-    private func removeArcLayer() {
-        for (index, sublayer) in layer.sublayers!.enumerated() {
-            if sublayer.name == arcLayerID {
-                layer.sublayers?.remove(at: index)
-            }
-        }
+    private func prepareArclayerForRedraw() {
+        arcLayer()?.removeAnimation(forKey: TimerControlConstants.arcLayerAnimationID)
+        arcLayer()?.path = nil
     }
 
     func displaySecondsCount(seconds: Int) -> String {
