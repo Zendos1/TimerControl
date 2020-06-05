@@ -144,6 +144,9 @@ public class TimerControlView: UIView {
     }
 
     override public func draw(_ rect: CGRect) {
+        guard rect.width == rect.height else {
+            fatalError("TimerControl should maintain a 1:1 aspect ratio")
+        }
         drawInnerOval(rect)
         drawOuterArc(rect)
         if(sleepDuration > 0) {
