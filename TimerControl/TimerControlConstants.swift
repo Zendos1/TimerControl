@@ -10,6 +10,7 @@
 struct TimerControlConstants {
     static let arcStartAngle = -CGFloat.pi / 2
     static let startEndDifferential: CGFloat = 0.0000001
+    static let arcWidthIncrement: CGFloat = 0.015
     static let fullCircleRadians = 2 * CGFloat.pi
     static let arcSpacer: CGFloat = 1.0
     static let arcLayerID = "arcLayer"

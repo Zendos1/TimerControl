@@ -34,13 +34,6 @@ public class TimerControlView: UIView {
         }
     }
 
-    // MARK: TODO
-    // Guarantee 1:1 UIView setup
-
-
-
-    // MARK: Init
-
     required public init(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)!
         setupApplicationStateObservers()
@@ -49,7 +42,7 @@ public class TimerControlView: UIView {
 
     // MARK: Public API
 
-    /// configure the TimerControl UI
+    /// configuration options for TimerControl UI
     /// arcWidth is a value between 1 and 10
     public func configureTimerControl(innerColor: UIColor = .gray,
                                       outerColor: UIColor = .blue,
@@ -126,10 +119,6 @@ public class TimerControlView: UIView {
 
     // MARK: View
 
-    private func arcWidthMultiplier() -> CGFloat {
-        return 0.015 * CGFloat(self.arcWidth)
-    }
-
     private func setupCounterLabel(textColor: UIColor) {
         counterLabel = UILabel(frame: CGRect(x: 0, y: 0, width: 0, height: 0))
         counterLabel.textAlignment = NSTextAlignment.center
@@ -178,7 +167,7 @@ public class TimerControlView: UIView {
             shapeLayer.path = arcPath(rect).cgPath
             shapeLayer.fillColor = UIColor.clear.cgColor
             shapeLayer.strokeColor = outerColor.cgColor
-            shapeLayer.lineWidth = rect.width * arcWidthMultiplier()
+            shapeLayer.lineWidth = arcWidth(rect)
             shapeLayer.lineDashPattern = configureDashPattern(arcDashPattern)
             shapeLayer.name = TimerControlConstants.arcLayerID
             layer.addSublayer(shapeLayer)
@@ -200,50 +189,10 @@ public class TimerControlView: UIView {
         }
     }
 
-    private func arcEndAngle() -> CGFloat {
-        return TimerControlConstants.arcStartAngle - TimerControlConstants.startEndDifferential -
-            (completedTimerPercentage() * TimerControlConstants.fullCircleRadians)
-    }
-
-    private func arcLayer() -> CAShapeLayer? {
-        return layer.sublayers?.compactMap({ sublayer in
-            sublayer.name == TimerControlConstants.arcLayerID ? sublayer as? CAShapeLayer : nil
-        }).first
-    }
-
-    private func arcWidth(_ rect: CGRect) -> CGFloat {
-        return rect.width * arcWidthMultiplier()
-    }
-
-    private func animateArcWithDuration(duration: Int) {
-        let animation = CABasicAnimation(keyPath: "strokeEnd")
-        animation.delegate = self
-        animation.fromValue = 1.0
-        animation.toValue = 0.0
-        animation.duration = CFTimeInterval(duration)
-        arcLayer()?.add(animation, forKey: TimerControlConstants.arcLayerAnimationID)
-    }
-
-    private func arcPath(_ rect: CGRect) -> UIBezierPath {
-        let centre = CGPoint(x: bounds.width/2, y: bounds.height/2)
-        let radius = min(bounds.width/2 - arcWidth(rect)/2, bounds.height/2 - arcWidth(rect)/2)
-        let arcPath = UIBezierPath(arcCenter: centre,
-                                   radius: radius,
-                                   startAngle: TimerControlConstants.arcStartAngle,
-                                   endAngle: arcEndAngle(),
-                                   clockwise:true)
-        return arcPath;
-    }
-
     private func stopTimerAnimation() {
         drawOuterArc(bounds)
         animateArcWithDuration(duration: 1)
         resetTimerState()
-    }
-
-    private func resetTimerState() {
-        sleepDuration = 0
-        sleepCounter = 0
     }
 
     private func prepareArclayerForRedraw() {
@@ -267,9 +216,51 @@ public class TimerControlView: UIView {
         counterLabel.text = displaySecondsCount(seconds: sleepCounter)
     }
 
+    // MARK: Helper
+
+    private func arcEndAngle() -> CGFloat {
+        return TimerControlConstants.arcStartAngle - TimerControlConstants.startEndDifferential -
+            (completedTimerPercentage() * TimerControlConstants.fullCircleRadians)
+    }
+
+    private func arcLayer() -> CAShapeLayer? {
+        return layer.sublayers?.compactMap({ sublayer in
+            sublayer.name == TimerControlConstants.arcLayerID ? sublayer as? CAShapeLayer : nil
+        }).first
+    }
+
+    private func arcWidth(_ rect: CGRect) -> CGFloat {
+        return rect.width * TimerControlConstants.arcWidthIncrement * CGFloat(self.arcWidth)
+    }
+
+    private func animateArcWithDuration(duration: Int) {
+        let animation = CABasicAnimation(keyPath: "strokeEnd")
+        animation.delegate = self
+        animation.fromValue = 1.0
+        animation.toValue = 0.0
+        animation.duration = CFTimeInterval(duration)
+        arcLayer()?.add(animation, forKey: TimerControlConstants.arcLayerAnimationID)
+    }
+
+    private func arcPath(_ rect: CGRect) -> UIBezierPath {
+        let centre = CGPoint(x: bounds.width/2, y: bounds.height/2)
+        let radius = min(bounds.width/2 - arcWidth(rect)/2, bounds.height/2 - arcWidth(rect)/2)
+        let arcPath = UIBezierPath(arcCenter: centre,
+                                   radius: radius,
+                                   startAngle: TimerControlConstants.arcStartAngle,
+                                   endAngle: arcEndAngle(),
+                                   clockwise:true)
+        return arcPath;
+    }
+
     private func completedTimerPercentage() -> CGFloat {
         guard sleepDuration > 0 else { return 0.0 }
         return (CGFloat(sleepDuration - sleepCounter)) / CGFloat(sleepDuration)
+    }
+
+    private func resetTimerState() {
+        sleepDuration = 0
+        sleepCounter = 0
     }
 }
 
