@@ -11,10 +11,13 @@
 		B073A53A24892DDA005F46A5 /* TimerControlConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = B073A53924892DDA005F46A5 /* TimerControlConstants.swift */; };
 		B09B2CF3247EB519004AA264 /* TimerControlDashPattern.swift in Sources */ = {isa = PBXBuildFile; fileRef = B09B2CF2247EB519004AA264 /* TimerControlDashPattern.swift */; };
 		B0D88CCB246EEC6900083617 /* TimerControl.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B0D88CC1246EEC6900083617 /* TimerControl.framework */; };
-		B0D88CD0246EEC6900083617 /* TimerControlTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0D88CCF246EEC6900083617 /* TimerControlTests.swift */; };
+		B0D88CD0246EEC6900083617 /* TimerControlViewTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0D88CCF246EEC6900083617 /* TimerControlViewTests.swift */; };
 		B0D88CD2246EEC6900083617 /* TimerControl.h in Headers */ = {isa = PBXBuildFile; fileRef = B0D88CC4246EEC6900083617 /* TimerControl.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		B0D88CDC246EED3400083617 /* TimerControlView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0D88CDB246EED3400083617 /* TimerControlView.swift */; };
 		B0D88D2E246F362300083617 /* TimerControl.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = B0D88CC1246EEC6900083617 /* TimerControl.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		B0EF2758248A89EC00D49DD7 /* MockSut.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0EF2757248A89EC00D49DD7 /* MockSut.swift */; };
+		B0EF275D248BE95A00D49DD7 /* MockViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = B0EF275C248BE95A00D49DD7 /* MockViewController.xib */; };
+		B0EF2760248BEF6800D49DD7 /* MockViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0EF275F248BEF6800D49DD7 /* MockViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -48,9 +51,12 @@
 		B0D88CC4246EEC6900083617 /* TimerControl.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TimerControl.h; sourceTree = "<group>"; };
 		B0D88CC5246EEC6900083617 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B0D88CCA246EEC6900083617 /* TimerControlTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TimerControlTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		B0D88CCF246EEC6900083617 /* TimerControlTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerControlTests.swift; sourceTree = "<group>"; };
+		B0D88CCF246EEC6900083617 /* TimerControlViewTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerControlViewTests.swift; sourceTree = "<group>"; };
 		B0D88CD1246EEC6900083617 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B0D88CDB246EED3400083617 /* TimerControlView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerControlView.swift; sourceTree = "<group>"; };
+		B0EF2757248A89EC00D49DD7 /* MockSut.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockSut.swift; sourceTree = "<group>"; };
+		B0EF275C248BE95A00D49DD7 /* MockViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MockViewController.xib; sourceTree = "<group>"; };
+		B0EF275F248BEF6800D49DD7 /* MockViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -106,10 +112,21 @@
 		B0D88CCE246EEC6900083617 /* TimerControlTests */ = {
 			isa = PBXGroup;
 			children = (
-				B0D88CCF246EEC6900083617 /* TimerControlTests.swift */,
+				B0EF275E248BEBE100D49DD7 /* Mocks */,
+				B0D88CCF246EEC6900083617 /* TimerControlViewTests.swift */,
 				B0D88CD1246EEC6900083617 /* Info.plist */,
 			);
 			path = TimerControlTests;
+			sourceTree = "<group>";
+		};
+		B0EF275E248BEBE100D49DD7 /* Mocks */ = {
+			isa = PBXGroup;
+			children = (
+				B0EF275F248BEF6800D49DD7 /* MockViewController.swift */,
+				B0EF275C248BE95A00D49DD7 /* MockViewController.xib */,
+				B0EF2757248A89EC00D49DD7 /* MockSut.swift */,
+			);
+			path = Mocks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -213,6 +230,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B0EF275D248BE95A00D49DD7 /* MockViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -234,7 +252,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B0D88CD0246EEC6900083617 /* TimerControlTests.swift in Sources */,
+				B0EF2758248A89EC00D49DD7 /* MockSut.swift in Sources */,
+				B0D88CD0246EEC6900083617 /* TimerControlViewTests.swift in Sources */,
+				B0EF2760248BEF6800D49DD7 /* MockViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

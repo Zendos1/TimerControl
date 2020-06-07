@@ -34,7 +34,7 @@ public class TimerControlView: UIView {
         }
     }
 
-    required public init(coder aDecoder: NSCoder) {
+    required init(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)!
         setupApplicationStateObservers()
         setupCounterLabel(textColor: .white)
@@ -75,7 +75,7 @@ public class TimerControlView: UIView {
 
     // MARK: Notification Observers
 
-    private func setupApplicationStateObservers() {
+    func setupApplicationStateObservers() {
         NotificationCenter.default.addObserver(self,
                                                selector: #selector(handleApplicationWillForeground),
                                                name: UIApplication.willEnterForegroundNotification,
@@ -119,7 +119,7 @@ public class TimerControlView: UIView {
 
     // MARK: View
 
-    private func setupCounterLabel(textColor: UIColor) {
+    func setupCounterLabel(textColor: UIColor) {
         counterLabel = UILabel(frame: CGRect(x: 0, y: 0, width: 0, height: 0))
         counterLabel.textAlignment = NSTextAlignment.center
         counterLabel.textColor = textColor
