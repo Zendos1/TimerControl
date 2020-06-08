@@ -44,7 +44,12 @@ public class TimerControlView: UIView {
     // MARK: Public API
 
     /// configuration options for TimerControl UI
-    /// arcWidth is a value between 1 and 10
+    /// - Parameters:
+    ///     - innerColor: UIColor describing the innerOval color
+    ///     - outerColor: UIColor describing the outer arc color
+    ///     - counterTextColor: UIColor describing the counter text color
+    ///     - arcWidth: a value between 1 and 10 describing the arc width as a proportion of the view size
+    ///     - arcDashPattern: TimerControlDashPattern enum with 4 preset patterns
     public func configureTimerControl(innerColor: UIColor = .gray,
                                       outerColor: UIColor = .blue,
                                       counterTextColor: UIColor = .white,
@@ -57,6 +62,9 @@ public class TimerControlView: UIView {
         self.arcDashPattern = arcDashPattern
     }
 
+    /// start the timer
+    /// - Parameters:
+    ///     - duration: Int value representing the duration of the timer in seconds
     public func startTimer(duration: Int) {
         sleepDuration = duration
         sleepCounter = sleepDuration
@@ -69,6 +77,7 @@ public class TimerControlView: UIView {
         animateArcWithDuration(duration: sleepDuration)
     }
 
+    /// stop the timer
     public func stopTimer() {
         timer.invalidate()
         guard sleepDuration > 0 else { return }
