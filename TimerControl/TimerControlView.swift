@@ -36,6 +36,7 @@ public class TimerControlView: UIView {
 
     required init(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)!
+        backgroundColor = .clear
         setupApplicationStateObservers()
         setupCounterLabel(textColor: .white)
     }
@@ -70,6 +71,7 @@ public class TimerControlView: UIView {
 
     public func stopTimer() {
         timer.invalidate()
+        guard sleepDuration > 0 else { return }
         stopTimerAnimation()
     }
 
