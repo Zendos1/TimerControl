@@ -13,19 +13,20 @@ public class TimerControlView: UIView {
 
     // MARK: - Instance Properties:
 
-    private var arcDashPattern: TimerControlDashPattern = .none
-    private var innerColor = UIColor.gray
-    private var outerColor = UIColor.blue
-    private var arcWidth: Int = 1 {
+    var notificationCentre: NotificationCenter = .default
+    var innerColor = UIColor.gray
+    var outerColor = UIColor.blue
+    var arcWidth: Int = 1 {
         didSet {
             if self.arcWidth < 1 { self.arcWidth = 1 }
             if self.arcWidth > 10 { self.arcWidth = 10 }
         }
     }
-    private var counterLabel = UILabel()
-    private var timer = Timer()
-    private var sleepCounter: Int = 0
-    private var sleepDuration: Int = 0 {
+    var arcDashPattern: TimerControlDashPattern = .none
+    var counterLabel = UILabel()
+    var timer = Timer()
+    var sleepCounter: Int = 0
+    var sleepDuration: Int = 0 {
         didSet {
             if (sleepDuration >= 3600) {
                 sleepDuration = 3599
@@ -97,23 +98,23 @@ public class TimerControlView: UIView {
                                                object: nil)
     }
 
-    @objc private func handleApplicationBackGrounding() {
+    @objc func handleApplicationBackGrounding() {
         cacheTimerStateToUserDefaults()
         prepareArclayerForRedraw()
     }
 
-    @objc private func handleApplicationWillForeground() {
+    @objc func handleApplicationWillForeground() {
         retrieveTimerStateFromUserDefaults()
     }
 
-    private func cacheTimerStateToUserDefaults() {
+    func cacheTimerStateToUserDefaults() {
         UserDefaults.standard.set(NSDate(), forKey: TimerControlConstants.cacheTime)
         UserDefaults.standard.set(sleepDuration, forKey: TimerControlConstants.sleepDuration)
         UserDefaults.standard.set(sleepCounter, forKey: TimerControlConstants.sleepCounter)
         UserDefaults.standard.synchronize()
     }
 
-    private func retrieveTimerStateFromUserDefaults() {
+    func retrieveTimerStateFromUserDefaults() {
         guard let cacheTime = UserDefaults.standard.value(forKey: TimerControlConstants.cacheTime) as? Date,
             let cachedDuration = UserDefaults.standard.value(forKey: TimerControlConstants.sleepDuration) as? Double,
             let cachedCounter = UserDefaults.standard.value(forKey: TimerControlConstants.sleepCounter) as? Double else {
@@ -165,7 +166,7 @@ public class TimerControlView: UIView {
         }
     }
 
-    private func drawInnerOval(_ rect: CGRect) {
+    func drawInnerOval(_ rect: CGRect) {
         let innerOvalRect = CGRect(x: arcWidth(rect) + TimerControlConstants.arcSpacer,
                                    y: arcWidth(rect) + TimerControlConstants.arcSpacer,
                                    width: bounds.width - (2 * (arcWidth(rect) + TimerControlConstants.arcSpacer)) ,
@@ -175,7 +176,7 @@ public class TimerControlView: UIView {
         innerOvalPath.fill()
     }
 
-    private func drawOuterArc(_ rect: CGRect) {
+    func drawOuterArc(_ rect: CGRect) {
         guard let arclayer = arcLayer() else {
             let shapeLayer = CAShapeLayer()
             shapeLayer.path = arcPath(rect).cgPath
@@ -190,7 +191,7 @@ public class TimerControlView: UIView {
         arclayer.path = arcPath(rect).cgPath
     }
 
-    private func configureDashPattern(_ pattern: TimerControlDashPattern) -> [NSNumber] {
+    func configureDashPattern(_ pattern: TimerControlDashPattern) -> [NSNumber] {
         switch pattern {
         case .narrow:
             return [2, 1]
@@ -203,13 +204,13 @@ public class TimerControlView: UIView {
         }
     }
 
-    private func stopTimerAnimation() {
+    func stopTimerAnimation() {
         drawOuterArc(bounds)
         animateArcWithDuration(duration: 1)
         resetTimerState()
     }
 
-    private func prepareArclayerForRedraw() {
+    func prepareArclayerForRedraw() {
         arcLayer()?.removeAnimation(forKey: TimerControlConstants.arcLayerAnimationID)
         arcLayer()?.path = nil
     }
@@ -218,7 +219,7 @@ public class TimerControlView: UIView {
         return String(format: "%01i:%02i", (seconds / 60), (seconds % 60))
     }
 
-    @objc private func updateCounter() {
+    @objc func updateCounter() {
         if (sleepCounter == 0) {
             delegate?.timerCompleted()
             timer.invalidate()
@@ -232,22 +233,22 @@ public class TimerControlView: UIView {
 
     // MARK: Helper
 
-    private func arcEndAngle() -> CGFloat {
+    func arcEndAngle() -> CGFloat {
         return TimerControlConstants.arcStartAngle - TimerControlConstants.startEndDifferential -
             (completedTimerPercentage() * TimerControlConstants.fullCircleRadians)
     }
 
-    private func arcLayer() -> CAShapeLayer? {
+    func arcLayer() -> CAShapeLayer? {
         return layer.sublayers?.compactMap({ sublayer in
             sublayer.name == TimerControlConstants.arcLayerID ? sublayer as? CAShapeLayer : nil
         }).first
     }
 
-    private func arcWidth(_ rect: CGRect) -> CGFloat {
+    func arcWidth(_ rect: CGRect) -> CGFloat {
         return rect.width * TimerControlConstants.arcWidthIncrement * CGFloat(self.arcWidth)
     }
 
-    private func animateArcWithDuration(duration: Int) {
+    func animateArcWithDuration(duration: Int) {
         let animation = CABasicAnimation(keyPath: "strokeEnd")
         animation.delegate = self
         animation.fromValue = 1.0
@@ -256,7 +257,7 @@ public class TimerControlView: UIView {
         arcLayer()?.add(animation, forKey: TimerControlConstants.arcLayerAnimationID)
     }
 
-    private func arcPath(_ rect: CGRect) -> UIBezierPath {
+    func arcPath(_ rect: CGRect) -> UIBezierPath {
         let centre = CGPoint(x: bounds.width/2, y: bounds.height/2)
         let radius = min(bounds.width/2 - arcWidth(rect)/2, bounds.height/2 - arcWidth(rect)/2)
         let arcPath = UIBezierPath(arcCenter: centre,
@@ -267,12 +268,12 @@ public class TimerControlView: UIView {
         return arcPath;
     }
 
-    private func completedTimerPercentage() -> CGFloat {
+    func completedTimerPercentage() -> CGFloat {
         guard sleepDuration > 0 else { return 0.0 }
         return (CGFloat(sleepDuration - sleepCounter)) / CGFloat(sleepDuration)
     }
 
-    private func resetTimerState() {
+    func resetTimerState() {
         sleepDuration = 0
         sleepCounter = 0
     }
