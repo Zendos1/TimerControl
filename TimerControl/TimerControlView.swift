@@ -42,6 +42,12 @@ public class TimerControlView: UIView {
         setupCounterLabel(textColor: .white)
     }
 
+    public override init(frame: CGRect) {
+        super.init(frame: frame)
+        setupApplicationStateObservers()
+        setupCounterLabel(textColor: .white)
+    }
+
     // MARK: Public API
 
     /// configuration options for TimerControl UI
