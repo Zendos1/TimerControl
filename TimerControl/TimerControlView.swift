@@ -94,14 +94,14 @@ public class TimerControlView: UIView {
     // MARK: Notification Observers
 
     func setupApplicationStateObservers() {
-        NotificationCenter.default.addObserver(self,
-                                               selector: #selector(handleApplicationWillForeground),
-                                               name: UIApplication.willEnterForegroundNotification,
-                                               object: nil)
-        NotificationCenter.default.addObserver(self,
-                                               selector: #selector(handleApplicationBackGrounding),
-                                               name: UIApplication.didEnterBackgroundNotification,
-                                               object: nil)
+        notificationCentre.addObserver(self,
+                                       selector: #selector(handleApplicationWillForeground),
+                                       name: UIApplication.willEnterForegroundNotification,
+                                       object: nil)
+        notificationCentre.addObserver(self,
+                                       selector: #selector(handleApplicationBackGrounding),
+                                       name: UIApplication.didEnterBackgroundNotification,
+                                       object: nil)
     }
 
     @objc func handleApplicationBackGrounding() {
