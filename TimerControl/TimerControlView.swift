@@ -14,6 +14,7 @@ public class TimerControlView: UIView {
     // MARK: - Instance Properties:
 
     var notificationCentre: NotificationCenter = .default
+    var userDefaults: UserDefaults = .standard
     var innerColor = UIColor.gray
     var outerColor = UIColor.blue
     var arcWidth: Int = 1 {
@@ -114,16 +115,16 @@ public class TimerControlView: UIView {
     }
 
     func cacheTimerStateToUserDefaults() {
-        UserDefaults.standard.set(NSDate(), forKey: TimerControlConstants.cacheTime)
-        UserDefaults.standard.set(sleepDuration, forKey: TimerControlConstants.sleepDuration)
-        UserDefaults.standard.set(sleepCounter, forKey: TimerControlConstants.sleepCounter)
-        UserDefaults.standard.synchronize()
+        userDefaults.set(NSDate(), forKey: TimerControlConstants.cacheTime)
+        userDefaults.set(sleepDuration, forKey: TimerControlConstants.sleepDuration)
+        userDefaults.set(sleepCounter, forKey: TimerControlConstants.sleepCounter)
+        userDefaults.synchronize()
     }
 
     func retrieveTimerStateFromUserDefaults() {
-        guard let cacheTime = UserDefaults.standard.value(forKey: TimerControlConstants.cacheTime) as? Date,
-            let cachedDuration = UserDefaults.standard.value(forKey: TimerControlConstants.sleepDuration) as? Double,
-            let cachedCounter = UserDefaults.standard.value(forKey: TimerControlConstants.sleepCounter) as? Double else {
+        guard let cacheTime = userDefaults.value(forKey: TimerControlConstants.cacheTime) as? Date,
+            let cachedDuration = userDefaults.value(forKey: TimerControlConstants.sleepDuration) as? Double,
+            let cachedCounter = userDefaults.value(forKey: TimerControlConstants.sleepCounter) as? Double else {
                 return
         }
         let backgroundedTime = NSDate().timeIntervalSince(cacheTime)
@@ -138,8 +139,8 @@ public class TimerControlView: UIView {
     // MARK: View
 
     func setupCounterLabel(textColor: UIColor) {
-        counterLabel = UILabel(frame: CGRect(x: 0, y: 0, width: 0, height: 0))
-        counterLabel.textAlignment = NSTextAlignment.center
+        counterLabel = UILabel(frame: CGRect.zero)
+        counterLabel.textAlignment = .center
         counterLabel.textColor = textColor
         counterLabel.translatesAutoresizingMaskIntoConstraints = false
         addSubview(counterLabel)

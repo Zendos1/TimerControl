@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		B03584B6248E9F5B00022DCA /* MockNotificationCentre.swift in Sources */ = {isa = PBXBuildFile; fileRef = B03584B5248E9F5B00022DCA /* MockNotificationCentre.swift */; };
+		B03584B8248FC94700022DCA /* MockUserDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = B03584B7248FC94700022DCA /* MockUserDefaults.swift */; };
 		B07160F82476BB50005C6AFF /* TimerControlDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B07160F72476BB50005C6AFF /* TimerControlDelegate.swift */; };
 		B073A53A24892DDA005F46A5 /* TimerControlConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = B073A53924892DDA005F46A5 /* TimerControlConstants.swift */; };
 		B09B2CF3247EB519004AA264 /* TimerControlDashPattern.swift in Sources */ = {isa = PBXBuildFile; fileRef = B09B2CF2247EB519004AA264 /* TimerControlDashPattern.swift */; };
@@ -46,6 +47,7 @@
 
 /* Begin PBXFileReference section */
 		B03584B5248E9F5B00022DCA /* MockNotificationCentre.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockNotificationCentre.swift; sourceTree = "<group>"; };
+		B03584B7248FC94700022DCA /* MockUserDefaults.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockUserDefaults.swift; sourceTree = "<group>"; };
 		B07160F72476BB50005C6AFF /* TimerControlDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerControlDelegate.swift; sourceTree = "<group>"; };
 		B073A53924892DDA005F46A5 /* TimerControlConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerControlConstants.swift; sourceTree = "<group>"; };
 		B09B2CF2247EB519004AA264 /* TimerControlDashPattern.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerControlDashPattern.swift; sourceTree = "<group>"; };
@@ -127,6 +129,7 @@
 				B0EF275F248BEF6800D49DD7 /* MockViewController.swift */,
 				B0EF275C248BE95A00D49DD7 /* MockViewController.xib */,
 				B03584B5248E9F5B00022DCA /* MockNotificationCentre.swift */,
+				B03584B7248FC94700022DCA /* MockUserDefaults.swift */,
 				B0EF2757248A89EC00D49DD7 /* MockSut.swift */,
 			);
 			path = Mocks;
@@ -256,6 +259,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				B0EF2758248A89EC00D49DD7 /* MockSut.swift in Sources */,
+				B03584B8248FC94700022DCA /* MockUserDefaults.swift in Sources */,
 				B03584B6248E9F5B00022DCA /* MockNotificationCentre.swift in Sources */,
 				B0D88CD0246EEC6900083617 /* TimerControlViewTests.swift in Sources */,
 				B0EF2760248BEF6800D49DD7 /* MockViewController.swift in Sources */,
