@@ -12,6 +12,8 @@
 		B07160F82476BB50005C6AFF /* TimerControlDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B07160F72476BB50005C6AFF /* TimerControlDelegate.swift */; };
 		B073A53A24892DDA005F46A5 /* TimerControlConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = B073A53924892DDA005F46A5 /* TimerControlConstants.swift */; };
 		B09B2CF3247EB519004AA264 /* TimerControlDashPattern.swift in Sources */ = {isa = PBXBuildFile; fileRef = B09B2CF2247EB519004AA264 /* TimerControlDashPattern.swift */; };
+		B09DB6CD24912CBF00922BB2 /* FatalErrorUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = B09DB6CC24912CBE00922BB2 /* FatalErrorUtil.swift */; };
+		B09DB6D0249285AA00922BB2 /* XCTestCase+FatalError.swift in Sources */ = {isa = PBXBuildFile; fileRef = B09DB6CF249285AA00922BB2 /* XCTestCase+FatalError.swift */; };
 		B0D88CCB246EEC6900083617 /* TimerControl.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B0D88CC1246EEC6900083617 /* TimerControl.framework */; };
 		B0D88CD0246EEC6900083617 /* TimerControlViewTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0D88CCF246EEC6900083617 /* TimerControlViewTests.swift */; };
 		B0D88CD2246EEC6900083617 /* TimerControl.h in Headers */ = {isa = PBXBuildFile; fileRef = B0D88CC4246EEC6900083617 /* TimerControl.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -51,6 +53,8 @@
 		B07160F72476BB50005C6AFF /* TimerControlDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerControlDelegate.swift; sourceTree = "<group>"; };
 		B073A53924892DDA005F46A5 /* TimerControlConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerControlConstants.swift; sourceTree = "<group>"; };
 		B09B2CF2247EB519004AA264 /* TimerControlDashPattern.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerControlDashPattern.swift; sourceTree = "<group>"; };
+		B09DB6CC24912CBE00922BB2 /* FatalErrorUtil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FatalErrorUtil.swift; sourceTree = "<group>"; };
+		B09DB6CF249285AA00922BB2 /* XCTestCase+FatalError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "XCTestCase+FatalError.swift"; sourceTree = "<group>"; };
 		B0D88CC1246EEC6900083617 /* TimerControl.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = TimerControl.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B0D88CC4246EEC6900083617 /* TimerControl.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TimerControl.h; sourceTree = "<group>"; };
 		B0D88CC5246EEC6900083617 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -82,6 +86,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		B09DB6CE2492856A00922BB2 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				B09DB6CF249285AA00922BB2 /* XCTestCase+FatalError.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
 		B0D88CB7246EEC6900083617 = {
 			isa = PBXGroup;
 			children = (
@@ -108,6 +120,7 @@
 				B073A53924892DDA005F46A5 /* TimerControlConstants.swift */,
 				B07160F72476BB50005C6AFF /* TimerControlDelegate.swift */,
 				B0D88CDB246EED3400083617 /* TimerControlView.swift */,
+				B09DB6CC24912CBE00922BB2 /* FatalErrorUtil.swift */,
 				B0D88CC5246EEC6900083617 /* Info.plist */,
 			);
 			path = TimerControl;
@@ -116,6 +129,7 @@
 		B0D88CCE246EEC6900083617 /* TimerControlTests */ = {
 			isa = PBXGroup;
 			children = (
+				B09DB6CE2492856A00922BB2 /* Extensions */,
 				B0EF275E248BEBE100D49DD7 /* Mocks */,
 				B0D88CCF246EEC6900083617 /* TimerControlViewTests.swift */,
 				B0D88CD1246EEC6900083617 /* Info.plist */,
@@ -251,6 +265,7 @@
 				B073A53A24892DDA005F46A5 /* TimerControlConstants.swift in Sources */,
 				B0D88CDC246EED3400083617 /* TimerControlView.swift in Sources */,
 				B07160F82476BB50005C6AFF /* TimerControlDelegate.swift in Sources */,
+				B09DB6CD24912CBF00922BB2 /* FatalErrorUtil.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -260,6 +275,7 @@
 			files = (
 				B0EF2758248A89EC00D49DD7 /* MockSut.swift in Sources */,
 				B03584B8248FC94700022DCA /* MockUserDefaults.swift in Sources */,
+				B09DB6D0249285AA00922BB2 /* XCTestCase+FatalError.swift in Sources */,
 				B03584B6248E9F5B00022DCA /* MockNotificationCentre.swift in Sources */,
 				B0D88CD0246EEC6900083617 /* TimerControlViewTests.swift in Sources */,
 				B0EF2760248BEF6800D49DD7 /* MockViewController.swift in Sources */,

@@ -195,7 +195,14 @@ class TimerControlTests: XCTestCase {
 
     func testDraw_invalidCGRect() {
         let invalidRect = CGRect(x: 0, y: 0, width: 10, height: 11)
-        sut.draw(invalidRect)
+        let expectedErrorMessage = "TimerControl should maintain a 1:1 aspect ratio"
+
+        expectFatalError(expectedMessage: expectedErrorMessage) {
+            self.sut.draw(invalidRect)
+        }
+    }
+
+    func testDrawInnerOval() {
 
     }
 }
