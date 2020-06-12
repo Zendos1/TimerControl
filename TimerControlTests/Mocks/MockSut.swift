@@ -17,8 +17,17 @@ class MockSut: TimerControlView {
     var resetTimerStateCalled = false
     var setupCounterLabelCalledWithTextColor: UIColor?
     var animateArcCalledWithDuration: Int?
-    var innerOvalRect: CGRect?
+    var drawInnerOvalCalled = false
     var outerArcRect: CGRect?
+    var pathForInnerOvalCalledWithRect: CGRect?
+    var arcWidthCalledForRect: CGRect?
+    var configureDashPatternCalled = false
+    var mockLayer: CAShapeLayer?
+    var mockPath: UIBezierPath?
+    var timerCompletedCalled = false
+    var timerTickedCalled = false
+    var mockSecondsCountDisplay: String?
+    var mockCompletedValue: CGFloat?
 
     convenience init(frame: CGRect,
                      notificationCentre: NotificationCenter,
@@ -44,6 +53,7 @@ class MockSut: TimerControlView {
 
     override func stopTimerAnimation() {
         stopTimerAnimationCalled = true
+        super.stopTimerAnimation()
     }
 
     override func cacheTimerStateToUserDefaults() {
@@ -53,6 +63,7 @@ class MockSut: TimerControlView {
 
     override func prepareArclayerForRedraw() {
         prepareArclayerForRedrawCalled = true
+        super.prepareArclayerForRedraw()
     }
 
     override func retrieveTimerStateFromUserDefaults() {
@@ -64,11 +75,60 @@ class MockSut: TimerControlView {
         resetTimerStateCalled = true
     }
 
-    override func drawInnerOval(_ rect: CGRect) {
-        innerOvalRect = rect
+    override func drawInnerOval(_ bezierPath: UIBezierPath) {
+        drawInnerOvalCalled = true
+        super.drawInnerOval(bezierPath)
     }
 
     override func drawOuterArc(_ rect: CGRect) {
         outerArcRect = rect
+        super.drawOuterArc(rect)
+    }
+
+    override func pathForInnerOval(_ rect: CGRect) -> UIBezierPath {
+        pathForInnerOvalCalledWithRect = rect
+        return super.pathForInnerOval(rect)
+    }
+
+    override func arcWidth(_ rect: CGRect) -> CGFloat {
+        arcWidthCalledForRect = rect
+        return super.arcWidth(rect)
+    }
+
+    override func configureDashPattern(_ pattern: TimerControlDashPattern) -> [NSNumber] {
+        configureDashPatternCalled = true
+        return super.configureDashPattern(pattern)
+    }
+
+    override func arcLayer() -> CAShapeLayer? {
+        return mockLayer ?? super.arcLayer()
+    }
+
+    override func arcPath(_ rect: CGRect) -> UIBezierPath {
+        guard let mockPath = mockPath else {
+            return super.arcPath(rect)
+        }
+        return mockPath
+    }
+
+    override func displaySecondsCount(seconds: Int) -> String {
+        guard let secondsDisplay = mockSecondsCountDisplay else {
+            return super.displaySecondsCount(seconds: seconds)
+        }
+        return secondsDisplay
+    }
+
+    override func completedTimerPercentage() -> CGFloat {
+        return mockCompletedValue ?? super.completedTimerPercentage()
+    }
+}
+
+extension MockSut: TimerControlDelegate {
+    func timerCompleted() {
+        timerCompletedCalled = true
+    }
+
+    func timerTicked() {
+        timerTickedCalled = true
     }
 }

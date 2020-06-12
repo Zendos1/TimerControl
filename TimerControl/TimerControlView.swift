@@ -166,21 +166,16 @@ public class TimerControlView: UIView {
         guard rect.width == rect.height else {
             fatalError("TimerControl should maintain a 1:1 aspect ratio")
         }
-        drawInnerOval(rect)
+        drawInnerOval(pathForInnerOval(rect))
         drawOuterArc(rect)
         if(sleepDuration > 0) {
             animateArcWithDuration(duration: sleepCounter)
         }
     }
 
-    func drawInnerOval(_ rect: CGRect) {
-        let innerOvalRect = CGRect(x: arcWidth(rect) + TimerControlConstants.arcSpacer,
-                                   y: arcWidth(rect) + TimerControlConstants.arcSpacer,
-                                   width: bounds.width - (2 * (arcWidth(rect) + TimerControlConstants.arcSpacer)) ,
-                                   height: bounds.height - (2 * (arcWidth(rect) + TimerControlConstants.arcSpacer)))
-        let innerOvalPath = UIBezierPath(ovalIn: innerOvalRect)
+    func drawInnerOval(_ bezierPath: UIBezierPath) {
         innerColor.setFill()
-        innerOvalPath.fill()
+        bezierPath.fill()
     }
 
     func drawOuterArc(_ rect: CGRect) {
@@ -253,6 +248,14 @@ public class TimerControlView: UIView {
 
     func arcWidth(_ rect: CGRect) -> CGFloat {
         return rect.width * TimerControlConstants.arcWidthIncrement * CGFloat(self.arcWidth)
+    }
+
+    func pathForInnerOval(_ rect: CGRect) -> UIBezierPath {
+        let innerRect = CGRect(x: arcWidth(rect) + TimerControlConstants.arcSpacer,
+                               y: arcWidth(rect) + TimerControlConstants.arcSpacer,
+                               width: bounds.width - (2 * (arcWidth(rect) + TimerControlConstants.arcSpacer)) ,
+                               height: bounds.height - (2 * (arcWidth(rect) + TimerControlConstants.arcSpacer)))
+        return UIBezierPath(ovalIn: innerRect)
     }
 
     func animateArcWithDuration(duration: Int) {
