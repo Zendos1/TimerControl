@@ -26,8 +26,10 @@ class MockSut: TimerControlView {
     var mockPath: UIBezierPath?
     var timerCompletedCalled = false
     var timerTickedCalled = false
+    var displaySecondsCountCalled = false
     var mockSecondsCountDisplay: String?
     var mockCompletedValue: CGFloat?
+    var mockArcWidth: CGFloat?
 
     convenience init(frame: CGRect,
                      notificationCentre: NotificationCenter,
@@ -49,6 +51,7 @@ class MockSut: TimerControlView {
 
     override func animateArcWithDuration(duration: Int) {
         animateArcCalledWithDuration = duration
+        super.animateArcWithDuration(duration: duration)
     }
 
     override func stopTimerAnimation() {
@@ -73,6 +76,7 @@ class MockSut: TimerControlView {
 
     override func resetTimerState() {
         resetTimerStateCalled = true
+        super.resetTimerState()
     }
 
     override func drawInnerOval(_ bezierPath: UIBezierPath) {
@@ -92,7 +96,10 @@ class MockSut: TimerControlView {
 
     override func arcWidth(_ rect: CGRect) -> CGFloat {
         arcWidthCalledForRect = rect
-        return super.arcWidth(rect)
+        guard let mockArcWidth = mockArcWidth else {
+            return super.arcWidth(rect)
+        }
+        return mockArcWidth
     }
 
     override func configureDashPattern(_ pattern: TimerControlDashPattern) -> [NSNumber] {
@@ -112,6 +119,7 @@ class MockSut: TimerControlView {
     }
 
     override func displaySecondsCount(seconds: Int) -> String {
+        displaySecondsCountCalled = true
         guard let secondsDisplay = mockSecondsCountDisplay else {
             return super.displaySecondsCount(seconds: seconds)
         }

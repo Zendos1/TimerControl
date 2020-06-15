@@ -41,6 +41,35 @@ class TimerControlTests: XCTestCase {
         super.tearDown()
     }
 
+    // MARK: Custom setters & Initilisers
+
+    func testArcWidthSetter_lowerBound() {
+        sut.arcWidth = 0
+
+        XCTAssertEqual(sut.arcWidth, 1)
+    }
+
+    func testArcWidthSetter_upperBound() {
+        sut.arcWidth = 11
+
+        XCTAssertEqual(sut.arcWidth, 10)
+    }
+
+    func testsleepDurationSetter() {
+        sut.sleepDuration = 100
+
+        XCTAssertEqual(sut.sleepDuration, 100)
+        XCTAssertTrue(sut.displaySecondsCountCalled)
+    }
+
+
+    func testsleepDurationSetter_upperBound() {
+        sut.sleepDuration = 4000
+
+        XCTAssertEqual(sut.sleepDuration, 3599)
+        XCTAssertTrue(sut.displaySecondsCountCalled)
+    }
+
     func testInitWithCoder() {
         let mockViewController = MockViewController()
         _ = Bundle(for: TimerControlTests.self).loadNibNamed("MockViewController",
@@ -56,6 +85,8 @@ class TimerControlTests: XCTestCase {
         XCTAssertTrue(sut.setupApplicationStateObserversCalled)
         XCTAssertEqual(sut.setupCounterLabelCalledWithTextColor, .white)
     }
+
+    // MARK: Public API
 
     func testConfigureTimerControlDefaultValues() {
         XCTAssertEqual(sut.innerColor, .gray)
@@ -298,6 +329,19 @@ class TimerControlTests: XCTestCase {
         XCTAssertEqual(sut.counterLabel.text, "0:01")
     }
 
+    func testAnimateArcWithDuration() throws {
+        sut.drawOuterArc(mockFrame)
+        sut.animateArcWithDuration(duration: 10)
+        let arclayer = sut.layer.sublayers?.last as? CAShapeLayer
+        let animation = arclayer?.animation(forKey: TimerControlConstants.arcLayerAnimationID) as? CABasicAnimation
+
+        XCTAssertNotNil(animation?.delegate)
+        XCTAssertEqual(animation?.keyPath, "strokeEnd")
+        XCTAssertEqual(animation?.fromValue as? CGFloat, 1.0)
+        XCTAssertEqual(animation?.toValue as? CGFloat, 0.0)
+        XCTAssertEqual(animation?.duration, CFTimeInterval(10.0))
+    }
+
     // MARK: Helper
 
     func testArcEndAngle() {
@@ -321,6 +365,73 @@ class TimerControlTests: XCTestCase {
         XCTAssertEqual(sut.arcWidth(mockFrame), expectedWidth)
     }
 
+    func testPathForInnerOval() {
+        let mockArcWidth: CGFloat = 5.0
+        sut.mockArcWidth = mockArcWidth
+        let innerRect = CGRect(x: mockArcWidth + TimerControlConstants.arcSpacer,
+                               y: mockArcWidth + TimerControlConstants.arcSpacer,
+                               width: mockFrame.width - (2 * (mockArcWidth + TimerControlConstants.arcSpacer)) ,
+                               height: mockFrame.height - (2 * (mockArcWidth + TimerControlConstants.arcSpacer)))
+        let expectedPath = UIBezierPath(ovalIn: innerRect)
 
-    // TODO: - test the custom setters
+        XCTAssertEqual(sut.pathForInnerOval(mockFrame), expectedPath)
+    }
+
+    func testArcPath() {
+        let mockArcWidth: CGFloat = 5.0
+        let mockCompletedValue: CGFloat = 1.5
+        sut.mockArcWidth = mockArcWidth
+        sut.mockCompletedValue = mockCompletedValue
+        let centre = CGPoint(x: mockFrame.width/2, y: mockFrame.height/2)
+        let radius = mockFrame.width/2 - mockArcWidth/2
+        let arcEndAngel = TimerControlConstants.arcStartAngle - TimerControlConstants.startEndDifferential -
+            (mockCompletedValue * TimerControlConstants.fullCircleRadians)
+        let expectedArcPath = UIBezierPath(arcCenter: centre,
+                                           radius: radius,
+                                           startAngle: TimerControlConstants.arcStartAngle,
+                                           endAngle: arcEndAngel,
+                                           clockwise:true)
+
+        XCTAssertEqual(sut.arcPath(mockFrame), expectedArcPath)
+    }
+
+    func testCompletedTimerPercentage_sleepDurationExpired() {
+        sut.sleepDuration = 0
+
+        XCTAssertEqual(sut.completedTimerPercentage(), 0.0)
+    }
+
+    func testCompletedTimerPercentage_sleepDurationActive() {
+        sut.sleepDuration = 2
+        sut.sleepCounter = 1
+        let expectedCompletedPercentage = CGFloat((2.0 - 1.0) / 2.0)
+
+        XCTAssertEqual(sut.completedTimerPercentage(), expectedCompletedPercentage)
+    }
+
+    func testResetTimerState() {
+        sut.sleepDuration = 2
+        sut.sleepCounter = 1
+        sut.resetTimerState()
+
+        XCTAssertEqual(sut.sleepDuration, 0)
+        XCTAssertEqual(sut.sleepCounter, 0)
+    }
+
+
+    // MARK: CAAnimationDelegate
+
+    func testAnimationDidStop_isFinished() {
+        sut.animationDidStop(CAAnimation(), finished: true)
+
+        XCTAssertTrue(sut.resetTimerStateCalled)
+        XCTAssertEqual(sut.outerArcRect, CGRect(x: 0, y: 0, width: mockFrame.width, height: mockFrame.height))
+    }
+
+    func testAnimationDidStop_isNotFinished() {
+        sut.animationDidStop(CAAnimation(), finished: false)
+
+        XCTAssertFalse(sut.resetTimerStateCalled)
+        XCTAssertNil(sut.outerArcRect)
+    }
 }

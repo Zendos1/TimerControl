@@ -233,6 +233,15 @@ public class TimerControlView: UIView {
         counterLabel.text = displaySecondsCount(seconds: sleepCounter)
     }
 
+    func animateArcWithDuration(duration: Int) {
+        let animation = CABasicAnimation(keyPath: "strokeEnd")
+        animation.delegate = self
+        animation.fromValue = 1.0
+        animation.toValue = 0.0
+        animation.duration = CFTimeInterval(duration)
+        arcLayer()?.add(animation, forKey: TimerControlConstants.arcLayerAnimationID)
+    }
+
     // MARK: Helper
 
     func arcEndAngle() -> CGFloat {
@@ -256,15 +265,6 @@ public class TimerControlView: UIView {
                                width: bounds.width - (2 * (arcWidth(rect) + TimerControlConstants.arcSpacer)) ,
                                height: bounds.height - (2 * (arcWidth(rect) + TimerControlConstants.arcSpacer)))
         return UIBezierPath(ovalIn: innerRect)
-    }
-
-    func animateArcWithDuration(duration: Int) {
-        let animation = CABasicAnimation(keyPath: "strokeEnd")
-        animation.delegate = self
-        animation.fromValue = 1.0
-        animation.toValue = 0.0
-        animation.duration = CFTimeInterval(duration)
-        arcLayer()?.add(animation, forKey: TimerControlConstants.arcLayerAnimationID)
     }
 
     func arcPath(_ rect: CGRect) -> UIBezierPath {
