@@ -58,6 +58,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		B0FD873C249A877B0084C78C /* TimerControl.podspec */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = TimerControl.podspec; sourceTree = "<group>"; };
+		B0FD873E249A8CD80084C78C /* LICENSE */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
 		OBJ_10 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		OBJ_11 /* FatalErrorUtil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FatalErrorUtil.swift; sourceTree = "<group>"; };
 		OBJ_12 /* TimerControlConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerControlConstants.swift; sourceTree = "<group>"; };
@@ -153,16 +155,17 @@
 			name = Products;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		OBJ_5 /*  */ = {
+		OBJ_5 = {
 			isa = PBXGroup;
 			children = (
+				B0FD873E249A8CD80084C78C /* LICENSE */,
+				B0FD873C249A877B0084C78C /* TimerControl.podspec */,
 				OBJ_37 /* README.md */,
 				OBJ_6 /* Package.swift */,
 				OBJ_7 /* Sources */,
 				OBJ_16 /* Tests */,
 				OBJ_31 /* Products */,
 			);
-			name = "";
 			sourceTree = "<group>";
 		};
 		OBJ_7 /* Sources */ = {
@@ -176,8 +179,8 @@
 		OBJ_8 /* TimerControl */ = {
 			isa = PBXGroup;
 			children = (
-				OBJ_9 /* TimerControl.h */,
 				OBJ_10 /* Info.plist */,
+				OBJ_9 /* TimerControl.h */,
 				OBJ_11 /* FatalErrorUtil.swift */,
 				OBJ_12 /* TimerControlConstants.swift */,
 				OBJ_13 /* TimerControlDashPattern.swift */,
@@ -254,7 +257,7 @@
 			knownRegions = (
 				en,
 			);
-			mainGroup = OBJ_5 /*  */;
+			mainGroup = OBJ_5;
 			productRefGroup = OBJ_31 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
