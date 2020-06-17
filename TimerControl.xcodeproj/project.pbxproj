@@ -11,6 +11,7 @@
 		B03584B8248FC94700022DCA /* MockUserDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = B03584B7248FC94700022DCA /* MockUserDefaults.swift */; };
 		B07160F82476BB50005C6AFF /* TimerControlDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B07160F72476BB50005C6AFF /* TimerControlDelegate.swift */; };
 		B073A53A24892DDA005F46A5 /* TimerControlConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = B073A53924892DDA005F46A5 /* TimerControlConstants.swift */; };
+		B08E627C249A4381000BB4D5 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = B08E627B249A4381000BB4D5 /* README.md */; };
 		B09B2CF3247EB519004AA264 /* TimerControlDashPattern.swift in Sources */ = {isa = PBXBuildFile; fileRef = B09B2CF2247EB519004AA264 /* TimerControlDashPattern.swift */; };
 		B09DB6CD24912CBF00922BB2 /* FatalErrorUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = B09DB6CC24912CBE00922BB2 /* FatalErrorUtil.swift */; };
 		B09DB6D0249285AA00922BB2 /* XCTestCase+FatalError.swift in Sources */ = {isa = PBXBuildFile; fileRef = B09DB6CF249285AA00922BB2 /* XCTestCase+FatalError.swift */; };
@@ -56,6 +57,7 @@
 		B03584B7248FC94700022DCA /* MockUserDefaults.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockUserDefaults.swift; sourceTree = "<group>"; };
 		B07160F72476BB50005C6AFF /* TimerControlDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerControlDelegate.swift; sourceTree = "<group>"; };
 		B073A53924892DDA005F46A5 /* TimerControlConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerControlConstants.swift; sourceTree = "<group>"; };
+		B08E627B249A4381000BB4D5 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		B09B2CF2247EB519004AA264 /* TimerControlDashPattern.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerControlDashPattern.swift; sourceTree = "<group>"; };
 		B09DB6CC24912CBE00922BB2 /* FatalErrorUtil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FatalErrorUtil.swift; sourceTree = "<group>"; };
 		B09DB6CF249285AA00922BB2 /* XCTestCase+FatalError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "XCTestCase+FatalError.swift"; sourceTree = "<group>"; };
@@ -94,6 +96,22 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		B08E6279249A4331000BB4D5 /* Sources */ = {
+			isa = PBXGroup;
+			children = (
+				B0D88CC3246EEC6900083617 /* TimerControl */,
+			);
+			path = Sources;
+			sourceTree = "<group>";
+		};
+		B08E627A249A4349000BB4D5 /* Tests */ = {
+			isa = PBXGroup;
+			children = (
+				B0D88CCE246EEC6900083617 /* TimerControlTests */,
+			);
+			path = Tests;
+			sourceTree = "<group>";
+		};
 		B09DB6CE2492856A00922BB2 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
@@ -105,8 +123,9 @@
 		B0D88CB7246EEC6900083617 = {
 			isa = PBXGroup;
 			children = (
-				B0D88CC3246EEC6900083617 /* TimerControl */,
-				B0D88CCE246EEC6900083617 /* TimerControlTests */,
+				B08E627B249A4381000BB4D5 /* README.md */,
+				B08E6279249A4331000BB4D5 /* Sources */,
+				B08E627A249A4349000BB4D5 /* Tests */,
 				B0D88CC2246EEC6900083617 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -255,6 +274,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B08E627C249A4381000BB4D5 /* README.md in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -440,7 +460,7 @@
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				FRAMEWORK_SEARCH_PATHS = "";
-				INFOPLIST_FILE = TimerControl/Info.plist;
+				INFOPLIST_FILE = Sources/TimerControl/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -468,7 +488,7 @@
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				FRAMEWORK_SEARCH_PATHS = "";
-				INFOPLIST_FILE = TimerControl/Info.plist;
+				INFOPLIST_FILE = Sources/TimerControl/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -490,7 +510,7 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = MXR39B5CCQ;
-				INFOPLIST_FILE = TimerControlTests/Info.plist;
+				INFOPLIST_FILE = Tests/TimerControlTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -509,7 +529,7 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = MXR39B5CCQ;
-				INFOPLIST_FILE = TimerControlTests/Info.plist;
+				INFOPLIST_FILE = Tests/TimerControlTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
