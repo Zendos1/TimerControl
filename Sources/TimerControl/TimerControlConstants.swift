@@ -6,6 +6,8 @@
 //  Copyright © 2020 mark jones. All rights reserved.
 //
 
+import UIKit
+
 /// non configurable TimerControl values
 struct TimerControlConstants {
     static let arcStartAngle = -CGFloat.pi / 2

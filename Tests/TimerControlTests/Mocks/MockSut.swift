@@ -6,6 +6,7 @@
 //  Copyright © 2020 mark jones. All rights reserved.
 //
 
+import UIKit
 @testable import TimerControl
 
 class MockSut: TimerControlView {
