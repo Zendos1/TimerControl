@@ -3,206 +3,214 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 46;
 	objects = {
 
+/* Begin PBXAggregateTarget section */
+		"TimerControl::TimerControlPackageTests::ProductTarget" /* TimerControlPackageTests */ = {
+			isa = PBXAggregateTarget;
+			buildConfigurationList = OBJ_56 /* Build configuration list for PBXAggregateTarget "TimerControlPackageTests" */;
+			buildPhases = (
+			);
+			dependencies = (
+				OBJ_59 /* PBXTargetDependency */,
+			);
+			name = TimerControlPackageTests;
+			productName = TimerControlPackageTests;
+		};
+/* End PBXAggregateTarget section */
+
 /* Begin PBXBuildFile section */
-		B03584B6248E9F5B00022DCA /* MockNotificationCentre.swift in Sources */ = {isa = PBXBuildFile; fileRef = B03584B5248E9F5B00022DCA /* MockNotificationCentre.swift */; };
-		B03584B8248FC94700022DCA /* MockUserDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = B03584B7248FC94700022DCA /* MockUserDefaults.swift */; };
-		B07160F82476BB50005C6AFF /* TimerControlDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B07160F72476BB50005C6AFF /* TimerControlDelegate.swift */; };
-		B073A53A24892DDA005F46A5 /* TimerControlConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = B073A53924892DDA005F46A5 /* TimerControlConstants.swift */; };
-		B08E627C249A4381000BB4D5 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = B08E627B249A4381000BB4D5 /* README.md */; };
-		B09B2CF3247EB519004AA264 /* TimerControlDashPattern.swift in Sources */ = {isa = PBXBuildFile; fileRef = B09B2CF2247EB519004AA264 /* TimerControlDashPattern.swift */; };
-		B09DB6CD24912CBF00922BB2 /* FatalErrorUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = B09DB6CC24912CBE00922BB2 /* FatalErrorUtil.swift */; };
-		B09DB6D0249285AA00922BB2 /* XCTestCase+FatalError.swift in Sources */ = {isa = PBXBuildFile; fileRef = B09DB6CF249285AA00922BB2 /* XCTestCase+FatalError.swift */; };
-		B09DB6D22493CD8100922BB2 /* MockBezierPath.swift in Sources */ = {isa = PBXBuildFile; fileRef = B09DB6D12493CD8100922BB2 /* MockBezierPath.swift */; };
-		B09DB6D42493CD8E00922BB2 /* MockColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = B09DB6D32493CD8E00922BB2 /* MockColor.swift */; };
-		B09DB6D62493E19A00922BB2 /* MockCAShapeLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = B09DB6D52493E19A00922BB2 /* MockCAShapeLayer.swift */; };
-		B09DB6D82493E90300922BB2 /* MockTimer.swift in Sources */ = {isa = PBXBuildFile; fileRef = B09DB6D72493E90300922BB2 /* MockTimer.swift */; };
-		B0D88CCB246EEC6900083617 /* TimerControl.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B0D88CC1246EEC6900083617 /* TimerControl.framework */; };
-		B0D88CD0246EEC6900083617 /* TimerControlViewTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0D88CCF246EEC6900083617 /* TimerControlViewTests.swift */; };
-		B0D88CD2246EEC6900083617 /* TimerControl.h in Headers */ = {isa = PBXBuildFile; fileRef = B0D88CC4246EEC6900083617 /* TimerControl.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		B0D88CDC246EED3400083617 /* TimerControlView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0D88CDB246EED3400083617 /* TimerControlView.swift */; };
-		B0D88D2E246F362300083617 /* TimerControl.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = B0D88CC1246EEC6900083617 /* TimerControl.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		B0EF2758248A89EC00D49DD7 /* MockSut.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0EF2757248A89EC00D49DD7 /* MockSut.swift */; };
-		B0EF275D248BE95A00D49DD7 /* MockViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = B0EF275C248BE95A00D49DD7 /* MockViewController.xib */; };
-		B0EF2760248BEF6800D49DD7 /* MockViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0EF275F248BEF6800D49DD7 /* MockViewController.swift */; };
+		OBJ_43 /* FatalErrorUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_11 /* FatalErrorUtil.swift */; };
+		OBJ_44 /* TimerControlConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_12 /* TimerControlConstants.swift */; };
+		OBJ_45 /* TimerControlDashPattern.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_13 /* TimerControlDashPattern.swift */; };
+		OBJ_46 /* TimerControlDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_14 /* TimerControlDelegate.swift */; };
+		OBJ_47 /* TimerControlView.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_15 /* TimerControlView.swift */; };
+		OBJ_54 /* Package.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_6 /* Package.swift */; };
+		OBJ_65 /* XCTestCase+FatalError.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_20 /* XCTestCase+FatalError.swift */; };
+		OBJ_66 /* MockBezierPath.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_22 /* MockBezierPath.swift */; };
+		OBJ_67 /* MockCAShapeLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_23 /* MockCAShapeLayer.swift */; };
+		OBJ_68 /* MockColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_24 /* MockColor.swift */; };
+		OBJ_69 /* MockNotificationCentre.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_25 /* MockNotificationCentre.swift */; };
+		OBJ_70 /* MockSut.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_26 /* MockSut.swift */; };
+		OBJ_71 /* MockTimer.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_27 /* MockTimer.swift */; };
+		OBJ_72 /* MockUserDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_28 /* MockUserDefaults.swift */; };
+		OBJ_73 /* MockViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_29 /* MockViewController.swift */; };
+		OBJ_74 /* TimerControlViewTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_30 /* TimerControlViewTests.swift */; };
+		OBJ_76 /* TimerControl.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = "TimerControl::TimerControl::Product" /* TimerControl.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		B0D88CCC246EEC6900083617 /* PBXContainerItemProxy */ = {
+		B0FD8731249A45C30084C78C /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = B0D88CB8246EEC6900083617 /* Project object */;
+			containerPortal = OBJ_1 /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = B0D88CC0246EEC6900083617;
+			remoteGlobalIDString = "TimerControl::TimerControl";
 			remoteInfo = TimerControl;
+		};
+		B0FD8732249A45C30084C78C /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = OBJ_1 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = "TimerControl::TimerControlTests";
+			remoteInfo = TimerControlTests;
 		};
 /* End PBXContainerItemProxy section */
 
-/* Begin PBXCopyFilesBuildPhase section */
-		B0D88D2D246F361900083617 /* CopyFiles */ = {
-			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 8;
-			dstPath = /$SRCROOT;
-			dstSubfolderSpec = 0;
-			files = (
-				B0D88D2E246F362300083617 /* TimerControl.framework in CopyFiles */,
-			);
-			runOnlyForDeploymentPostprocessing = 1;
-		};
-/* End PBXCopyFilesBuildPhase section */
-
 /* Begin PBXFileReference section */
-		B03584B5248E9F5B00022DCA /* MockNotificationCentre.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockNotificationCentre.swift; sourceTree = "<group>"; };
-		B03584B7248FC94700022DCA /* MockUserDefaults.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockUserDefaults.swift; sourceTree = "<group>"; };
-		B07160F72476BB50005C6AFF /* TimerControlDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerControlDelegate.swift; sourceTree = "<group>"; };
-		B073A53924892DDA005F46A5 /* TimerControlConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerControlConstants.swift; sourceTree = "<group>"; };
-		B08E627B249A4381000BB4D5 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
-		B09B2CF2247EB519004AA264 /* TimerControlDashPattern.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerControlDashPattern.swift; sourceTree = "<group>"; };
-		B09DB6CC24912CBE00922BB2 /* FatalErrorUtil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FatalErrorUtil.swift; sourceTree = "<group>"; };
-		B09DB6CF249285AA00922BB2 /* XCTestCase+FatalError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "XCTestCase+FatalError.swift"; sourceTree = "<group>"; };
-		B09DB6D12493CD8100922BB2 /* MockBezierPath.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockBezierPath.swift; sourceTree = "<group>"; };
-		B09DB6D32493CD8E00922BB2 /* MockColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockColor.swift; sourceTree = "<group>"; };
-		B09DB6D52493E19A00922BB2 /* MockCAShapeLayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockCAShapeLayer.swift; sourceTree = "<group>"; };
-		B09DB6D72493E90300922BB2 /* MockTimer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockTimer.swift; sourceTree = "<group>"; };
-		B0D88CC1246EEC6900083617 /* TimerControl.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = TimerControl.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		B0D88CC4246EEC6900083617 /* TimerControl.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TimerControl.h; sourceTree = "<group>"; };
-		B0D88CC5246EEC6900083617 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		B0D88CCA246EEC6900083617 /* TimerControlTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TimerControlTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		B0D88CCF246EEC6900083617 /* TimerControlViewTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerControlViewTests.swift; sourceTree = "<group>"; };
-		B0D88CD1246EEC6900083617 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		B0D88CDB246EED3400083617 /* TimerControlView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerControlView.swift; sourceTree = "<group>"; };
-		B0EF2757248A89EC00D49DD7 /* MockSut.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockSut.swift; sourceTree = "<group>"; };
-		B0EF275C248BE95A00D49DD7 /* MockViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MockViewController.xib; sourceTree = "<group>"; };
-		B0EF275F248BEF6800D49DD7 /* MockViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockViewController.swift; sourceTree = "<group>"; };
+		OBJ_10 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		OBJ_11 /* FatalErrorUtil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FatalErrorUtil.swift; sourceTree = "<group>"; };
+		OBJ_12 /* TimerControlConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerControlConstants.swift; sourceTree = "<group>"; };
+		OBJ_13 /* TimerControlDashPattern.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerControlDashPattern.swift; sourceTree = "<group>"; };
+		OBJ_14 /* TimerControlDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerControlDelegate.swift; sourceTree = "<group>"; };
+		OBJ_15 /* TimerControlView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerControlView.swift; sourceTree = "<group>"; };
+		OBJ_18 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		OBJ_20 /* XCTestCase+FatalError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "XCTestCase+FatalError.swift"; sourceTree = "<group>"; };
+		OBJ_22 /* MockBezierPath.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockBezierPath.swift; sourceTree = "<group>"; };
+		OBJ_23 /* MockCAShapeLayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockCAShapeLayer.swift; sourceTree = "<group>"; };
+		OBJ_24 /* MockColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockColor.swift; sourceTree = "<group>"; };
+		OBJ_25 /* MockNotificationCentre.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockNotificationCentre.swift; sourceTree = "<group>"; };
+		OBJ_26 /* MockSut.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockSut.swift; sourceTree = "<group>"; };
+		OBJ_27 /* MockTimer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockTimer.swift; sourceTree = "<group>"; };
+		OBJ_28 /* MockUserDefaults.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockUserDefaults.swift; sourceTree = "<group>"; };
+		OBJ_29 /* MockViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockViewController.swift; sourceTree = "<group>"; };
+		OBJ_30 /* TimerControlViewTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerControlViewTests.swift; sourceTree = "<group>"; };
+		OBJ_37 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		OBJ_6 /* Package.swift */ = {isa = PBXFileReference; explicitFileType = sourcecode.swift; path = Package.swift; sourceTree = "<group>"; };
+		OBJ_9 /* TimerControl.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TimerControl.h; sourceTree = "<group>"; };
+		"TimerControl::TimerControl::Product" /* TimerControl.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = TimerControl.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		"TimerControl::TimerControlTests::Product" /* TimerControlTests.xctest */ = {isa = PBXFileReference; lastKnownFileType = file; path = TimerControlTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		B0D88CBE246EEC6900083617 /* Frameworks */ = {
+		OBJ_48 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
+			buildActionMask = 0;
 			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		B0D88CC7246EEC6900083617 /* Frameworks */ = {
+		OBJ_75 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
+			buildActionMask = 0;
 			files = (
-				B0D88CCB246EEC6900083617 /* TimerControl.framework in Frameworks */,
+				OBJ_76 /* TimerControl.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		B08E6279249A4331000BB4D5 /* Sources */ = {
+		OBJ_16 /* Tests */ = {
 			isa = PBXGroup;
 			children = (
-				B0D88CC3246EEC6900083617 /* TimerControl */,
+				OBJ_17 /* TimerControlTests */,
 			);
-			path = Sources;
-			sourceTree = "<group>";
+			name = Tests;
+			sourceTree = SOURCE_ROOT;
 		};
-		B08E627A249A4349000BB4D5 /* Tests */ = {
+		OBJ_17 /* TimerControlTests */ = {
 			isa = PBXGroup;
 			children = (
-				B0D88CCE246EEC6900083617 /* TimerControlTests */,
+				OBJ_18 /* Info.plist */,
+				OBJ_19 /* Extensions */,
+				OBJ_21 /* Mocks */,
+				OBJ_30 /* TimerControlViewTests.swift */,
 			);
-			path = Tests;
-			sourceTree = "<group>";
+			name = TimerControlTests;
+			path = Tests/TimerControlTests;
+			sourceTree = SOURCE_ROOT;
 		};
-		B09DB6CE2492856A00922BB2 /* Extensions */ = {
+		OBJ_19 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
-				B09DB6CF249285AA00922BB2 /* XCTestCase+FatalError.swift */,
+				OBJ_20 /* XCTestCase+FatalError.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
 		};
-		B0D88CB7246EEC6900083617 = {
+		OBJ_21 /* Mocks */ = {
 			isa = PBXGroup;
 			children = (
-				B08E627B249A4381000BB4D5 /* README.md */,
-				B08E6279249A4331000BB4D5 /* Sources */,
-				B08E627A249A4349000BB4D5 /* Tests */,
-				B0D88CC2246EEC6900083617 /* Products */,
-			);
-			sourceTree = "<group>";
-		};
-		B0D88CC2246EEC6900083617 /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				B0D88CC1246EEC6900083617 /* TimerControl.framework */,
-				B0D88CCA246EEC6900083617 /* TimerControlTests.xctest */,
-			);
-			name = Products;
-			sourceTree = SOURCE_ROOT;
-		};
-		B0D88CC3246EEC6900083617 /* TimerControl */ = {
-			isa = PBXGroup;
-			children = (
-				B0D88CC4246EEC6900083617 /* TimerControl.h */,
-				B09B2CF2247EB519004AA264 /* TimerControlDashPattern.swift */,
-				B073A53924892DDA005F46A5 /* TimerControlConstants.swift */,
-				B07160F72476BB50005C6AFF /* TimerControlDelegate.swift */,
-				B0D88CDB246EED3400083617 /* TimerControlView.swift */,
-				B09DB6CC24912CBE00922BB2 /* FatalErrorUtil.swift */,
-				B0D88CC5246EEC6900083617 /* Info.plist */,
-			);
-			path = TimerControl;
-			sourceTree = "<group>";
-		};
-		B0D88CCE246EEC6900083617 /* TimerControlTests */ = {
-			isa = PBXGroup;
-			children = (
-				B09DB6CE2492856A00922BB2 /* Extensions */,
-				B0EF275E248BEBE100D49DD7 /* Mocks */,
-				B0D88CCF246EEC6900083617 /* TimerControlViewTests.swift */,
-				B0D88CD1246EEC6900083617 /* Info.plist */,
-			);
-			path = TimerControlTests;
-			sourceTree = "<group>";
-		};
-		B0EF275E248BEBE100D49DD7 /* Mocks */ = {
-			isa = PBXGroup;
-			children = (
-				B0EF275F248BEF6800D49DD7 /* MockViewController.swift */,
-				B0EF275C248BE95A00D49DD7 /* MockViewController.xib */,
-				B03584B5248E9F5B00022DCA /* MockNotificationCentre.swift */,
-				B03584B7248FC94700022DCA /* MockUserDefaults.swift */,
-				B09DB6D12493CD8100922BB2 /* MockBezierPath.swift */,
-				B09DB6D52493E19A00922BB2 /* MockCAShapeLayer.swift */,
-				B09DB6D32493CD8E00922BB2 /* MockColor.swift */,
-				B09DB6D72493E90300922BB2 /* MockTimer.swift */,
-				B0EF2757248A89EC00D49DD7 /* MockSut.swift */,
+				OBJ_22 /* MockBezierPath.swift */,
+				OBJ_23 /* MockCAShapeLayer.swift */,
+				OBJ_24 /* MockColor.swift */,
+				OBJ_25 /* MockNotificationCentre.swift */,
+				OBJ_26 /* MockSut.swift */,
+				OBJ_27 /* MockTimer.swift */,
+				OBJ_28 /* MockUserDefaults.swift */,
+				OBJ_29 /* MockViewController.swift */,
 			);
 			path = Mocks;
 			sourceTree = "<group>";
 		};
+		OBJ_31 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				"TimerControl::TimerControl::Product" /* TimerControl.framework */,
+				"TimerControl::TimerControlTests::Product" /* TimerControlTests.xctest */,
+			);
+			name = Products;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		OBJ_5 /*  */ = {
+			isa = PBXGroup;
+			children = (
+				OBJ_37 /* README.md */,
+				OBJ_6 /* Package.swift */,
+				OBJ_7 /* Sources */,
+				OBJ_16 /* Tests */,
+				OBJ_31 /* Products */,
+			);
+			name = "";
+			sourceTree = "<group>";
+		};
+		OBJ_7 /* Sources */ = {
+			isa = PBXGroup;
+			children = (
+				OBJ_8 /* TimerControl */,
+			);
+			name = Sources;
+			sourceTree = SOURCE_ROOT;
+		};
+		OBJ_8 /* TimerControl */ = {
+			isa = PBXGroup;
+			children = (
+				OBJ_9 /* TimerControl.h */,
+				OBJ_10 /* Info.plist */,
+				OBJ_11 /* FatalErrorUtil.swift */,
+				OBJ_12 /* TimerControlConstants.swift */,
+				OBJ_13 /* TimerControlDashPattern.swift */,
+				OBJ_14 /* TimerControlDelegate.swift */,
+				OBJ_15 /* TimerControlView.swift */,
+			);
+			name = TimerControl;
+			path = Sources/TimerControl;
+			sourceTree = SOURCE_ROOT;
+		};
 /* End PBXGroup section */
 
-/* Begin PBXHeadersBuildPhase section */
-		B0D88CBC246EEC6900083617 /* Headers */ = {
-			isa = PBXHeadersBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				B0D88CD2246EEC6900083617 /* TimerControl.h in Headers */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-/* End PBXHeadersBuildPhase section */
-
 /* Begin PBXNativeTarget section */
-		B0D88CC0246EEC6900083617 /* TimerControl */ = {
+		"TimerControl::SwiftPMPackageDescription" /* TimerControlPackageDescription */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = B0D88CD5246EEC6900083617 /* Build configuration list for PBXNativeTarget "TimerControl" */;
+			buildConfigurationList = OBJ_50 /* Build configuration list for PBXNativeTarget "TimerControlPackageDescription" */;
 			buildPhases = (
-				B0D88CBC246EEC6900083617 /* Headers */,
-				B0D88CBD246EEC6900083617 /* Sources */,
-				B0D88CBE246EEC6900083617 /* Frameworks */,
-				B0D88CBF246EEC6900083617 /* Resources */,
-				B0D88D2D246F361900083617 /* CopyFiles */,
+				OBJ_53 /* Sources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = TimerControlPackageDescription;
+			productName = TimerControlPackageDescription;
+			productType = "com.apple.product-type.framework";
+		};
+		"TimerControl::TimerControl" /* TimerControl */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = OBJ_39 /* Build configuration list for PBXNativeTarget "TimerControl" */;
+			buildPhases = (
+				OBJ_42 /* Sources */,
+				OBJ_48 /* Frameworks */,
 			);
 			buildRules = (
 			);
@@ -210,369 +218,345 @@
 			);
 			name = TimerControl;
 			productName = TimerControl;
-			productReference = B0D88CC1246EEC6900083617 /* TimerControl.framework */;
+			productReference = "TimerControl::TimerControl::Product" /* TimerControl.framework */;
 			productType = "com.apple.product-type.framework";
 		};
-		B0D88CC9246EEC6900083617 /* TimerControlTests */ = {
+		"TimerControl::TimerControlTests" /* TimerControlTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = B0D88CD8246EEC6900083617 /* Build configuration list for PBXNativeTarget "TimerControlTests" */;
+			buildConfigurationList = OBJ_61 /* Build configuration list for PBXNativeTarget "TimerControlTests" */;
 			buildPhases = (
-				B0D88CC6246EEC6900083617 /* Sources */,
-				B0D88CC7246EEC6900083617 /* Frameworks */,
-				B0D88CC8246EEC6900083617 /* Resources */,
+				OBJ_64 /* Sources */,
+				OBJ_75 /* Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-				B0D88CCD246EEC6900083617 /* PBXTargetDependency */,
+				OBJ_77 /* PBXTargetDependency */,
 			);
 			name = TimerControlTests;
 			productName = TimerControlTests;
-			productReference = B0D88CCA246EEC6900083617 /* TimerControlTests.xctest */;
+			productReference = "TimerControl::TimerControlTests::Product" /* TimerControlTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
-		B0D88CB8246EEC6900083617 /* Project object */ = {
+		OBJ_1 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastSwiftUpdateCheck = 1140;
-				LastUpgradeCheck = 1140;
-				ORGANIZATIONNAME = "mark jones";
-				TargetAttributes = {
-					B0D88CC0246EEC6900083617 = {
-						CreatedOnToolsVersion = 11.4.1;
-						LastSwiftMigration = 1140;
-					};
-					B0D88CC9246EEC6900083617 = {
-						CreatedOnToolsVersion = 11.4.1;
-					};
-				};
+				LastSwiftMigration = 9999;
+				LastUpgradeCheck = 9999;
 			};
-			buildConfigurationList = B0D88CBB246EEC6900083617 /* Build configuration list for PBXProject "TimerControl" */;
-			compatibilityVersion = "Xcode 9.3";
+			buildConfigurationList = OBJ_2 /* Build configuration list for PBXProject "TimerControl" */;
+			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
 				en,
-				Base,
 			);
-			mainGroup = B0D88CB7246EEC6900083617;
-			productRefGroup = B0D88CC2246EEC6900083617 /* Products */;
+			mainGroup = OBJ_5 /*  */;
+			productRefGroup = OBJ_31 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				B0D88CC0246EEC6900083617 /* TimerControl */,
-				B0D88CC9246EEC6900083617 /* TimerControlTests */,
+				"TimerControl::TimerControl" /* TimerControl */,
+				"TimerControl::SwiftPMPackageDescription" /* TimerControlPackageDescription */,
+				"TimerControl::TimerControlPackageTests::ProductTarget" /* TimerControlPackageTests */,
+				"TimerControl::TimerControlTests" /* TimerControlTests */,
 			);
 		};
 /* End PBXProject section */
 
-/* Begin PBXResourcesBuildPhase section */
-		B0D88CBF246EEC6900083617 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				B08E627C249A4381000BB4D5 /* README.md in Resources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		B0D88CC8246EEC6900083617 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				B0EF275D248BE95A00D49DD7 /* MockViewController.xib in Resources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-/* End PBXResourcesBuildPhase section */
-
 /* Begin PBXSourcesBuildPhase section */
-		B0D88CBD246EEC6900083617 /* Sources */ = {
+		OBJ_42 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
+			buildActionMask = 0;
 			files = (
-				B09B2CF3247EB519004AA264 /* TimerControlDashPattern.swift in Sources */,
-				B073A53A24892DDA005F46A5 /* TimerControlConstants.swift in Sources */,
-				B0D88CDC246EED3400083617 /* TimerControlView.swift in Sources */,
-				B07160F82476BB50005C6AFF /* TimerControlDelegate.swift in Sources */,
-				B09DB6CD24912CBF00922BB2 /* FatalErrorUtil.swift in Sources */,
+				OBJ_43 /* FatalErrorUtil.swift in Sources */,
+				OBJ_44 /* TimerControlConstants.swift in Sources */,
+				OBJ_45 /* TimerControlDashPattern.swift in Sources */,
+				OBJ_46 /* TimerControlDelegate.swift in Sources */,
+				OBJ_47 /* TimerControlView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		B0D88CC6246EEC6900083617 /* Sources */ = {
+		OBJ_53 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
+			buildActionMask = 0;
 			files = (
-				B09DB6D62493E19A00922BB2 /* MockCAShapeLayer.swift in Sources */,
-				B0EF2758248A89EC00D49DD7 /* MockSut.swift in Sources */,
-				B03584B8248FC94700022DCA /* MockUserDefaults.swift in Sources */,
-				B09DB6D0249285AA00922BB2 /* XCTestCase+FatalError.swift in Sources */,
-				B09DB6D42493CD8E00922BB2 /* MockColor.swift in Sources */,
-				B03584B6248E9F5B00022DCA /* MockNotificationCentre.swift in Sources */,
-				B09DB6D22493CD8100922BB2 /* MockBezierPath.swift in Sources */,
-				B0D88CD0246EEC6900083617 /* TimerControlViewTests.swift in Sources */,
-				B0EF2760248BEF6800D49DD7 /* MockViewController.swift in Sources */,
-				B09DB6D82493E90300922BB2 /* MockTimer.swift in Sources */,
+				OBJ_54 /* Package.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		OBJ_64 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 0;
+			files = (
+				OBJ_65 /* XCTestCase+FatalError.swift in Sources */,
+				OBJ_66 /* MockBezierPath.swift in Sources */,
+				OBJ_67 /* MockCAShapeLayer.swift in Sources */,
+				OBJ_68 /* MockColor.swift in Sources */,
+				OBJ_69 /* MockNotificationCentre.swift in Sources */,
+				OBJ_70 /* MockSut.swift in Sources */,
+				OBJ_71 /* MockTimer.swift in Sources */,
+				OBJ_72 /* MockUserDefaults.swift in Sources */,
+				OBJ_73 /* MockViewController.swift in Sources */,
+				OBJ_74 /* TimerControlViewTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		B0D88CCD246EEC6900083617 /* PBXTargetDependency */ = {
+		OBJ_59 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = B0D88CC0246EEC6900083617 /* TimerControl */;
-			targetProxy = B0D88CCC246EEC6900083617 /* PBXContainerItemProxy */;
+			target = "TimerControl::TimerControlTests" /* TimerControlTests */;
+			targetProxy = B0FD8732249A45C30084C78C /* PBXContainerItemProxy */;
+		};
+		OBJ_77 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = "TimerControl::TimerControl" /* TimerControl */;
+			targetProxy = B0FD8731249A45C30084C78C /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
-		B0D88CD3246EEC6900083617 /* Debug */ = {
+		OBJ_3 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_SEARCH_USER_PATHS = NO;
-				CLANG_ANALYZER_NONNULL = YES;
-				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
-				CLANG_CXX_LIBRARY = "libc++";
-				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
-				CLANG_ENABLE_OBJC_WEAK = YES;
-				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
-				CLANG_WARN_BOOL_CONVERSION = YES;
-				CLANG_WARN_COMMA = YES;
-				CLANG_WARN_CONSTANT_CONVERSION = YES;
-				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
-				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
-				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
-				CLANG_WARN_EMPTY_BODY = YES;
-				CLANG_WARN_ENUM_CONVERSION = YES;
-				CLANG_WARN_INFINITE_RECURSION = YES;
-				CLANG_WARN_INT_CONVERSION = YES;
-				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
-				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
-				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
-				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
-				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
-				CLANG_WARN_STRICT_PROTOTYPES = YES;
-				CLANG_WARN_SUSPICIOUS_MOVE = YES;
-				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
-				CLANG_WARN_UNREACHABLE_CODE = YES;
-				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COMBINE_HIDPI_IMAGES = YES;
 				COPY_PHASE_STRIP = NO;
-				CURRENT_PROJECT_VERSION = 1;
 				DEBUG_INFORMATION_FORMAT = dwarf;
-				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				ENABLE_TESTABILITY = YES;
-				GCC_C_LANGUAGE_STANDARD = gnu11;
-				GCC_DYNAMIC_NO_PIC = NO;
-				GCC_NO_COMMON_BLOCKS = YES;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_NS_ASSERTIONS = YES;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PREPROCESSOR_DEFINITIONS = (
+					"$(inherited)",
+					"SWIFT_PACKAGE=1",
 					"DEBUG=1",
-					"$(inherited)",
 				);
-				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
-				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
-				GCC_WARN_UNDECLARED_SELECTOR = YES;
-				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
-				GCC_WARN_UNUSED_FUNCTION = YES;
-				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.4;
-				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
-				MTL_FAST_MATH = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.10;
 				ONLY_ACTIVE_ARCH = YES;
-				SDKROOT = iphoneos;
-				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				OTHER_SWIFT_FLAGS = "$(inherited) -DXcode";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+				SUPPORTED_PLATFORMS = "macosx iphoneos iphonesimulator appletvos appletvsimulator watchos watchsimulator";
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) SWIFT_PACKAGE DEBUG";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
+				USE_HEADERMAP = NO;
 			};
 			name = Debug;
 		};
-		B0D88CD4246EEC6900083617 /* Release */ = {
+		OBJ_4 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_SEARCH_USER_PATHS = NO;
-				CLANG_ANALYZER_NONNULL = YES;
-				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
-				CLANG_CXX_LIBRARY = "libc++";
-				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
-				CLANG_ENABLE_OBJC_WEAK = YES;
-				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
-				CLANG_WARN_BOOL_CONVERSION = YES;
-				CLANG_WARN_COMMA = YES;
-				CLANG_WARN_CONSTANT_CONVERSION = YES;
-				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
-				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
-				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
-				CLANG_WARN_EMPTY_BODY = YES;
-				CLANG_WARN_ENUM_CONVERSION = YES;
-				CLANG_WARN_INFINITE_RECURSION = YES;
-				CLANG_WARN_INT_CONVERSION = YES;
-				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
-				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
-				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
-				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
-				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
-				CLANG_WARN_STRICT_PROTOTYPES = YES;
-				CLANG_WARN_SUSPICIOUS_MOVE = YES;
-				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
-				CLANG_WARN_UNREACHABLE_CODE = YES;
-				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				COPY_PHASE_STRIP = NO;
-				CURRENT_PROJECT_VERSION = 1;
+				COMBINE_HIDPI_IMAGES = YES;
+				COPY_PHASE_STRIP = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				ENABLE_NS_ASSERTIONS = NO;
-				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				GCC_C_LANGUAGE_STANDARD = gnu11;
-				GCC_NO_COMMON_BLOCKS = YES;
-				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
-				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
-				GCC_WARN_UNDECLARED_SELECTOR = YES;
-				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
-				GCC_WARN_UNUSED_FUNCTION = YES;
-				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.4;
-				MTL_ENABLE_DEBUG_INFO = NO;
-				MTL_FAST_MATH = YES;
-				SDKROOT = iphoneos;
-				SWIFT_COMPILATION_MODE = wholemodule;
-				SWIFT_OPTIMIZATION_LEVEL = "-O";
-				VALIDATE_PRODUCT = YES;
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				GCC_OPTIMIZATION_LEVEL = s;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"$(inherited)",
+					"SWIFT_PACKAGE=1",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 10.10;
+				OTHER_SWIFT_FLAGS = "$(inherited) -DXcode";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+				SUPPORTED_PLATFORMS = "macosx iphoneos iphonesimulator appletvos appletvsimulator watchos watchsimulator";
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) SWIFT_PACKAGE";
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				USE_HEADERMAP = NO;
 			};
 			name = Release;
 		};
-		B0D88CD6246EEC6900083617 /* Debug */ = {
+		OBJ_40 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_STYLE = Automatic;
-				DEFINES_MODULE = YES;
-				DEVELOPMENT_TEAM = MXR39B5CCQ;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				FRAMEWORK_SEARCH_PATHS = "";
-				INFOPLIST_FILE = Sources/TimerControl/Info.plist;
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
-				LD_RUNPATH_SEARCH_PATHS = (
+				ENABLE_TESTABILITY = YES;
+				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
+					"$(PLATFORM_DIR)/Developer/Library/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = mjpro.TimerControl;
+				HEADER_SEARCH_PATHS = "$(inherited)";
+				INFOPLIST_FILE = TimerControl.xcodeproj/TimerControl_Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) $(TOOLCHAIN_DIR)/usr/lib/swift/macosx";
+				MACOSX_DEPLOYMENT_TARGET = 10.10;
+				OTHER_CFLAGS = "$(inherited)";
+				OTHER_LDFLAGS = "$(inherited)";
+				OTHER_SWIFT_FLAGS = "$(inherited)";
+				PRODUCT_BUNDLE_IDENTIFIER = TimerControl;
+				PRODUCT_MODULE_NAME = "$(TARGET_NAME:c99extidentifier)";
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
-				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited)";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGET_NAME = TimerControl;
+				TVOS_DEPLOYMENT_TARGET = 9.0;
+				WATCHOS_DEPLOYMENT_TARGET = 2.0;
 			};
 			name = Debug;
 		};
-		B0D88CD7246EEC6900083617 /* Release */ = {
+		OBJ_41 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_STYLE = Automatic;
-				DEFINES_MODULE = YES;
-				DEVELOPMENT_TEAM = MXR39B5CCQ;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				FRAMEWORK_SEARCH_PATHS = "";
-				INFOPLIST_FILE = Sources/TimerControl/Info.plist;
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
-				LD_RUNPATH_SEARCH_PATHS = (
+				ENABLE_TESTABILITY = YES;
+				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
+					"$(PLATFORM_DIR)/Developer/Library/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = mjpro.TimerControl;
+				HEADER_SEARCH_PATHS = "$(inherited)";
+				INFOPLIST_FILE = TimerControl.xcodeproj/TimerControl_Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) $(TOOLCHAIN_DIR)/usr/lib/swift/macosx";
+				MACOSX_DEPLOYMENT_TARGET = 10.10;
+				OTHER_CFLAGS = "$(inherited)";
+				OTHER_LDFLAGS = "$(inherited)";
+				OTHER_SWIFT_FLAGS = "$(inherited)";
+				PRODUCT_BUNDLE_IDENTIFIER = TimerControl;
+				PRODUCT_MODULE_NAME = "$(TARGET_NAME:c99extidentifier)";
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited)";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGET_NAME = TimerControl;
+				TVOS_DEPLOYMENT_TARGET = 9.0;
+				WATCHOS_DEPLOYMENT_TARGET = 2.0;
 			};
 			name = Release;
 		};
-		B0D88CD9246EEC6900083617 /* Debug */ = {
+		OBJ_51 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = MXR39B5CCQ;
-				INFOPLIST_FILE = Tests/TimerControlTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
-				PRODUCT_BUNDLE_IDENTIFIER = mjpro.TimerControlTests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				LD = /usr/bin/true;
+				OTHER_SWIFT_FLAGS = "-swift-version 5 -I $(TOOLCHAIN_DIR)/usr/lib/swift/pm/4_2 -target x86_64-apple-macosx10.10 -sdk /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.15.sdk -package-description-version 5.2.0";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
 		};
-		B0D88CDA246EEC6900083617 /* Release */ = {
+		OBJ_52 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = MXR39B5CCQ;
-				INFOPLIST_FILE = Tests/TimerControlTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
-				PRODUCT_BUNDLE_IDENTIFIER = mjpro.TimerControlTests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				LD = /usr/bin/true;
+				OTHER_SWIFT_FLAGS = "-swift-version 5 -I $(TOOLCHAIN_DIR)/usr/lib/swift/pm/4_2 -target x86_64-apple-macosx10.10 -sdk /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.15.sdk -package-description-version 5.2.0";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		OBJ_57 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+			};
+			name = Debug;
+		};
+		OBJ_58 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+			};
+			name = Release;
+		};
+		OBJ_62 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
+				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PLATFORM_DIR)/Developer/Library/Frameworks",
+				);
+				HEADER_SEARCH_PATHS = "$(inherited)";
+				INFOPLIST_FILE = TimerControl.xcodeproj/TimerControlTests_Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @loader_path/../Frameworks @loader_path/Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 10.10;
+				OTHER_CFLAGS = "$(inherited)";
+				OTHER_LDFLAGS = "$(inherited)";
+				OTHER_SWIFT_FLAGS = "$(inherited)";
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited)";
+				SWIFT_VERSION = 5.0;
+				TARGET_NAME = TimerControlTests;
+				TVOS_DEPLOYMENT_TARGET = 9.0;
+				WATCHOS_DEPLOYMENT_TARGET = 2.0;
+			};
+			name = Debug;
+		};
+		OBJ_63 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
+				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PLATFORM_DIR)/Developer/Library/Frameworks",
+				);
+				HEADER_SEARCH_PATHS = "$(inherited)";
+				INFOPLIST_FILE = TimerControl.xcodeproj/TimerControlTests_Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @loader_path/../Frameworks @loader_path/Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 10.10;
+				OTHER_CFLAGS = "$(inherited)";
+				OTHER_LDFLAGS = "$(inherited)";
+				OTHER_SWIFT_FLAGS = "$(inherited)";
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited)";
+				SWIFT_VERSION = 5.0;
+				TARGET_NAME = TimerControlTests;
+				TVOS_DEPLOYMENT_TARGET = 9.0;
+				WATCHOS_DEPLOYMENT_TARGET = 2.0;
 			};
 			name = Release;
 		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		B0D88CBB246EEC6900083617 /* Build configuration list for PBXProject "TimerControl" */ = {
+		OBJ_2 /* Build configuration list for PBXProject "TimerControl" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				B0D88CD3246EEC6900083617 /* Debug */,
-				B0D88CD4246EEC6900083617 /* Release */,
+				OBJ_3 /* Debug */,
+				OBJ_4 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		B0D88CD5246EEC6900083617 /* Build configuration list for PBXNativeTarget "TimerControl" */ = {
+		OBJ_39 /* Build configuration list for PBXNativeTarget "TimerControl" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				B0D88CD6246EEC6900083617 /* Debug */,
-				B0D88CD7246EEC6900083617 /* Release */,
+				OBJ_40 /* Debug */,
+				OBJ_41 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		B0D88CD8246EEC6900083617 /* Build configuration list for PBXNativeTarget "TimerControlTests" */ = {
+		OBJ_50 /* Build configuration list for PBXNativeTarget "TimerControlPackageDescription" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				B0D88CD9246EEC6900083617 /* Debug */,
-				B0D88CDA246EEC6900083617 /* Release */,
+				OBJ_51 /* Debug */,
+				OBJ_52 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		OBJ_56 /* Build configuration list for PBXAggregateTarget "TimerControlPackageTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				OBJ_57 /* Debug */,
+				OBJ_58 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		OBJ_61 /* Build configuration list for PBXNativeTarget "TimerControlTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				OBJ_62 /* Debug */,
+				OBJ_63 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
-	rootObject = B0D88CB8246EEC6900083617 /* Project object */;
+	rootObject = OBJ_1 /* Project object */;
 }
