@@ -27,6 +27,26 @@
 			<key>primary</key>
 			<true/>
 		</dict>
+		<key>TimerControl::SwiftPMPackageDescription</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>TimerControl::TimerControl</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>TimerControl::TimerControlPackageTests::ProductTarget</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>TimerControl::TimerControlTests</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
 	</dict>
 </dict>
 </plist>
