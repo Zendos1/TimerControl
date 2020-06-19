@@ -17,7 +17,7 @@
             skipped = "NO">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "B0D88CC9246EEC6900083617"
+               BlueprintIdentifier = "TimerControl::TimerControlTests"
                BuildableName = "TimerControlTests.xctest"
                BlueprintName = "TimerControlTests"
                ReferencedContainer = "container:TimerControl.xcodeproj">

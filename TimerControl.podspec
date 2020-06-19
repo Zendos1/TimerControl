@@ -1,7 +1,7 @@
 
 Pod::Spec.new do |s|
   s.name         = "TimerControl"
-  s.version      = "1.0.1"
+  s.version      = "1.0.2"
   s.summary      = "A customisable UIView countdown timer control"
   s.description  = <<-DESC
   TimerControl is a customisable UIView based countdown timer control.
@@ -11,7 +11,8 @@ Pod::Spec.new do |s|
   s.license      = { :type => "MIT", :file => "LICENSE" }
   s.author    = "Mark Jones"
   s.platform     = :ios, "13.0"
-  s.source       = { :git => "https://github.com/Zendos1/TimerControl", :tag => s.version.to_s }
-  s.source_files  = "Classes", "Sources/**/*"
+  s.source       = { :git => "https://github.com/Zendos1/TimerControl.git", :tag => s.version.to_s }
+  s.source_files  = "Sources/**/*"
   s.exclude_files = "Package.swift"
+  s.swift_version = "5.1"
 end
