@@ -13,6 +13,6 @@ Pod::Spec.new do |s|
   s.platform     = :ios, "13.0"
   s.source       = { :git => "https://github.com/Zendos1/TimerControl.git", :tag => s.version.to_s }
   s.source_files  = "Sources/**/*"
-  s.exclude_files = "Package.swift"
+  s.exclude_files = "Sources/**/Info.plist", "Package.swift"
   s.swift_version = "5.1"
 end
