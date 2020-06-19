@@ -35,7 +35,6 @@
 		OBJ_70 /* MockSut.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_26 /* MockSut.swift */; };
 		OBJ_71 /* MockTimer.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_27 /* MockTimer.swift */; };
 		OBJ_72 /* MockUserDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_28 /* MockUserDefaults.swift */; };
-		OBJ_73 /* MockViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_29 /* MockViewController.swift */; };
 		OBJ_74 /* TimerControlViewTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_30 /* TimerControlViewTests.swift */; };
 		OBJ_76 /* TimerControl.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = "TimerControl::TimerControl::Product" /* TimerControl.framework */; };
 /* End PBXBuildFile section */
@@ -75,7 +74,6 @@
 		OBJ_26 /* MockSut.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockSut.swift; sourceTree = "<group>"; };
 		OBJ_27 /* MockTimer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockTimer.swift; sourceTree = "<group>"; };
 		OBJ_28 /* MockUserDefaults.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockUserDefaults.swift; sourceTree = "<group>"; };
-		OBJ_29 /* MockViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockViewController.swift; sourceTree = "<group>"; };
 		OBJ_30 /* TimerControlViewTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerControlViewTests.swift; sourceTree = "<group>"; };
 		OBJ_37 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		OBJ_6 /* Package.swift */ = {isa = PBXFileReference; explicitFileType = sourcecode.swift; path = Package.swift; sourceTree = "<group>"; };
@@ -141,7 +139,6 @@
 				OBJ_26 /* MockSut.swift */,
 				OBJ_27 /* MockTimer.swift */,
 				OBJ_28 /* MockUserDefaults.swift */,
-				OBJ_29 /* MockViewController.swift */,
 			);
 			path = Mocks;
 			sourceTree = "<group>";
@@ -303,7 +300,6 @@
 				OBJ_70 /* MockSut.swift in Sources */,
 				OBJ_71 /* MockTimer.swift in Sources */,
 				OBJ_72 /* MockUserDefaults.swift in Sources */,
-				OBJ_73 /* MockViewController.swift in Sources */,
 				OBJ_74 /* TimerControlViewTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

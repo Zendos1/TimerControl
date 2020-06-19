@@ -70,16 +70,6 @@ class TimerControlTests: XCTestCase {
         XCTAssertTrue(sut.displaySecondsCountCalled)
     }
 
-    func testInitWithCoder() {
-        let mockViewController = MockViewController()
-        _ = Bundle(for: TimerControlTests.self).loadNibNamed("MockViewController",
-                                                             owner: mockViewController,
-                                                             options: nil)
-
-        XCTAssertTrue(mockViewController.mockTimerControlView.setupApplicationStateObserversCalled)
-        XCTAssertEqual(mockViewController.mockTimerControlView.setupCounterLabelCalledWithTextColor, .white)
-    }
-
     func testInitWithFrame() {
         XCTAssertEqual(sut.frame, mockFrame)
         XCTAssertTrue(sut.setupApplicationStateObserversCalled)
