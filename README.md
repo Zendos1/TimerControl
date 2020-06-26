@@ -10,7 +10,9 @@ It represents a visible reducing arc for the remaining seconds in a defined coun
 [![GitHub license](https://img.shields.io/badge/license-MIT-lightgrey.svg)](https://github.com/Zendos1/TimerControl/blob/master/LICENSE)
 
 ## Demo
-![demo1](Screenshots/demo1.gif)
+<p align="center">
+  <img width="326" height="294" src="Screenshots/demo1.gif">
+</p>
 
 ## Getting Started
 
