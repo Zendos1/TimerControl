@@ -79,7 +79,7 @@ Ensure the UIView has a 1:1 aspect ratio - TimerControl will not draw and will c
 The visual setup of the TimerControl can be configured before it is used by calling hte below API with the desired configurations.
 If the configuration API is not called then the default values are used for all configurable options.
 
-> `func configureTimerControl(innerColor: UIColor = .gray, outerColor: UIColor = .blue, counterTextColor: UIColor = .white, arcWidth: Int = 1, arcDashPattern: TimerControlDashPattern = .none)`
+>`configureTimerControl(innerColor: UIColor = .gray, outerColor: UIColor = .blue, counterTextColor: UIColor = .white, arcWidth: Int = 1, arcDashPattern: TimerControlDashPattern = .none)`
 
 The configurable values are: 
 - innerColor: UIColor describing the innerOval color
@@ -90,17 +90,18 @@ The configurable values are:
 
 To start the timer, use the below API, passing the number of desired seconds as the duration parameter: 
 
->`func startTimer(duration: Int)`
+>`startTimer(duration: Int)`
 
 To stop the timer, use the following API: 
 
-> `func stopTimer()`
+> `stopTimer()`
 
 To gain more control over the active timer, the ***TimerControlDelegate*** can be used.
 Set the TimerControl delegate object to your class and implement the delegate methods below:
 
->`func timerCompleted()`
->`func timerTicked()`
+>`timerCompleted()`
+
+>`timerTicked()`
 
 This way the host application can be notified when the timer ticks and when the timer completes.
 
