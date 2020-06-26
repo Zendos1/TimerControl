@@ -13,7 +13,7 @@ It represents a visible reducing arc for the remaining seconds in a defined coun
 
 To use TimerControl in your Xcode project. 
 Include TimerControl framework in your project.
-Create a UIView either programatically or in a xib or storyboard, set the type of the UIView to `TimerControl`.
+Create a UIView either programatically or in a xib or storyboard, set the type of the UIView to `TimerControlView`.
 Ensure the UIView has a 1:1 aspect ratio - TimerControl will not draw and will crash the host application unless it is strictly 1:1.
 
 
@@ -24,8 +24,8 @@ Ensure the UIView has a 1:1 aspect ratio - TimerControl will not draw and will c
 
 ## Installing
 ### - [Swift Package Manager](https://developer.apple.com/documentation/xcode/adding_package_dependencies_to_your_app)
-In Xcode goto ***Xcode>File>Swift Packages>Add Package Dependency***,
-Paste the below url for TimerControl into the *Repository URL*  textfield
+In Xcode goto `Xcode>File>Swift Packages>Add Package Dependency`,
+Paste the below url for TimerControl into the *Repository URL* textfield
 '''
 https://github.com/Zendos1/TimerControl
 '''
@@ -35,7 +35,7 @@ To include TimerControl to your project using cocoapods, add the following to yo
 ```
 pod 'TimerControl'
 ```
-to instruct cocoapods to pull down the new dependency, 
+To instruct cocoapods to pull down the new dependency, 
 run the following command through terminal in the same folder location as the podfile.
 ```
 pod install
@@ -46,20 +46,20 @@ To include TimerControl to your project using Carthage, add the following to you
 ```
 github "Zendos1/TimerControl"
 ```
-to instruct Carthage to pull down and build the new dependency,
+To instruct Carthage to pull down and build the new dependency,
 run the following command through terminal in the same folder location as the Cartfile.
 ```
 carthage update --platform ios
 ```
-Carthage will pull down TimerControl framework and build to a folder called ***Builds***.
-In the General tab of your Xcode project, under ***Frameworks, Libraries and Embedded content***, Drag the *Carthage/Builds/iOS/TimerControl.framework* into Xcode. Because TimerControl is a dynamic framework - Ensure that the framework has ***Embedded*** selected in the dropdown beside the framework under *Frameworks, Libraries and Embedded content*
+Carthage will pull down TimerControl framework and build to a folder called `Builds`.
+In the General tab of your Xcode project, under `Frameworks, Libraries and Embedded content`, Drag the `Carthage/Builds/iOS/TimerControl.framework` into Xcode. Because TimerControl is a dynamic framework - Ensure that the framework has `Embedded` selected in the dropdown beside the framework under `Frameworks, Libraries and Embedded content`
 
 You should also add a ***New Run Script phase*** under the *Build Phases* tab in Xcode. 
 Add the following script:  
 ```
 /usr/local/bin/carthage copy-frameworks
 ```
-In the same Run Script Phase, under *Input Files*, add an entry for the new framework:
+In the same Run Script Phase, under `Input Files`, add an entry for the new framework:
 ```
 $(SRCROOT)/Carthage/Build/iOS/TimerControl.framework
 ```
@@ -73,7 +73,7 @@ The Xcode *Example* target can be run on simulator to see the framework in opera
 
 To use TimerControl: 
 Include TimerControl framework in your project using one of the above processes.
-Create a UIView either programatically or in a xib or storyboard, set the type of the UIView to `TimerControl`.
+Create a UIView either programatically or in a xib or storyboard, set the type of the UIView to `TimerControlView`.
 Ensure the UIView has a 1:1 aspect ratio - TimerControl will not draw and will crash the host application unless it is strictly 1:1.
 
 The visual setup of the TimerControl can be configured before it is used by calling hte below API with the desired configurations.
