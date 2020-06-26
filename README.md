@@ -54,7 +54,7 @@ carthage update --platform ios
 Carthage will pull down TimerControl framework and build to a folder called `Builds`.
 In the General tab of your Xcode project, under `Frameworks, Libraries and Embedded content`, Drag the `Carthage/Builds/iOS/TimerControl.framework` into Xcode. Because TimerControl is a dynamic framework - Ensure that the framework has `Embedded` selected in the dropdown beside the framework under `Frameworks, Libraries and Embedded content`
 
-You should also add a ***New Run Script phase*** under the *Build Phases* tab in Xcode. 
+You should also add a `New Run Script phase` under the *Build Phases* tab in Xcode. 
 Add the following script:  
 ```
 /usr/local/bin/carthage copy-frameworks
@@ -68,7 +68,7 @@ The Run Script Phase entry is a Carthage solution to an issue with simulator arc
 
 ## Usage
 There is an Example project included in the repository. 
-Open the ***TimerControl.xcworkspace***, The ***Example*** project can be seen in the File Navigator.
+Open the `TimerControl.xcworkspace`, The `Example` project can be seen in the File Navigator.
 The Xcode *Example* target can be run on simulator to see the framework in operation.
 
 To use TimerControl: 
