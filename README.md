@@ -9,13 +9,15 @@ It represents a visible reducing arc for the remaining seconds in a defined coun
 [![Carthage compatible](https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat)](https://github.com/Carthage/Carthage)
 [![GitHub license](https://img.shields.io/badge/license-MIT-lightgrey.svg)](https://github.com/Zendos1/TimerControl/blob/master/LICENSE)
 
+## Demo
+![demo1](Screenshots/demo1.gif) ![demo2](Screenshots/demo2.gif) ![demo3](Screenshots/demo3.gif)
+
 ## Getting Started
 
 To use TimerControl in your Xcode project. 
 Include TimerControl framework in your project.
 Create a UIView either programatically or in a xib or storyboard, set the type of the UIView to `TimerControlView`.
 Ensure the UIView has a 1:1 aspect ratio - TimerControl will not draw and will crash the host application unless it is strictly 1:1.
-
 
 ### Prerequisites
 
