@@ -23,7 +23,7 @@ Ensure the UIView has a 1:1 aspect ratio - TimerControl will not draw and will c
 
 ### Prerequisites
 
-* iOS 13
+* iOS 12
 * Xcode 11
 
 ## Installing
