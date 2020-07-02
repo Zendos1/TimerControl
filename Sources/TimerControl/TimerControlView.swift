@@ -107,10 +107,10 @@ public class TimerControlView: UIView {
 
     @objc func handleApplicationBackGrounding() {
         cacheTimerStateToUserDefaults()
-        prepareArclayerForRedraw()
     }
 
     @objc func handleApplicationWillForeground() {
+        prepareArclayerForRedraw()
         retrieveTimerStateFromUserDefaults()
     }
 

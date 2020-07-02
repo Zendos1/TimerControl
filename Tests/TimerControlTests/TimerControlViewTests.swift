@@ -144,12 +144,12 @@ class TimerControlTests: XCTestCase {
         sut.handleApplicationBackGrounding()
 
         XCTAssertTrue(sut.cacheTimerStateToUserDefaultsCalled)
-        XCTAssertTrue(sut.prepareArclayerForRedrawCalled)
     }
 
     func testHandleApplicationWillForeground() {
         sut.handleApplicationWillForeground()
 
+        XCTAssertTrue(sut.prepareArclayerForRedrawCalled)
         XCTAssertTrue(sut.retrieveTimerStateFromUserDefaultsCalled)
     }
 
