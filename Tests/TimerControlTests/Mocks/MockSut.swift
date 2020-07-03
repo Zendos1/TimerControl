@@ -31,6 +31,8 @@ class MockSut: TimerControlView {
     var mockSecondsCountDisplay: String?
     var mockCompletedValue: CGFloat?
     var mockArcWidth: CGFloat?
+    var allowCallTrackingInMethod = false
+    var setNeedsDisplayCalled = false
 
     convenience init(frame: CGRect,
                      notificationCentre: NotificationCenter,
@@ -129,6 +131,13 @@ class MockSut: TimerControlView {
 
     override func completedTimerPercentage() -> CGFloat {
         return mockCompletedValue ?? super.completedTimerPercentage()
+    }
+
+    override func setNeedsDisplay() {
+        if allowCallTrackingInMethod == true {
+            setNeedsDisplayCalled = true
+        }
+        super.setNeedsDisplay()
     }
 }
 

@@ -173,6 +173,11 @@ public class TimerControlView: UIView {
         }
     }
 
+    override public func didMoveToWindow() {
+        guard sleepDuration > 0 else { return }
+        setNeedsDisplay()
+    }
+
     func drawInnerOval(_ bezierPath: UIBezierPath) {
         innerColor.setFill()
         bezierPath.fill()

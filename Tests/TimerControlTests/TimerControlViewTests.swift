@@ -233,6 +233,22 @@ class TimerControlTests: XCTestCase {
         }
     }
 
+    func testDidMoveToWindow_shouldInvalidateLayout() {
+        sut.sleepDuration = 1
+        sut.allowCallTrackingInMethod = true
+        sut.didMoveToWindow()
+
+        XCTAssertTrue(sut.setNeedsDisplayCalled)
+    }
+
+    func testDidMoveToWindow_shouldNotInvalidateLayout() {
+        sut.sleepDuration = 0
+        sut.allowCallTrackingInMethod = true
+        sut.didMoveToWindow()
+
+        XCTAssertFalse(sut.setNeedsDisplayCalled)
+    }
+
     func testDrawInnerOval() {
         sut.innerColor = mockColor
         sut.drawInnerOval(mockBezierPath)
