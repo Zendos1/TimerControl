@@ -1,7 +1,7 @@
 
 Pod::Spec.new do |s|
   s.name         = "TimerControl"
-  s.version      = "1.0.4"
+  s.version      = "1.0.5"
   s.summary      = "A customisable UIView countdown timer control"
   s.description  = <<-DESC
   TimerControl is a customisable UIView based countdown timer control.
