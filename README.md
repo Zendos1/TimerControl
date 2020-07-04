@@ -11,7 +11,7 @@ It represents a visible reducing arc for the remaining seconds in a defined coun
 
 ## Demo
 <p align="center">
-  <img width="326" height="294" src="https://github.com/Zendos1/TimerControl/blob/master/Screenshots/demo1.gif">
+  <img width="326" height="294" src="https://raw.github.com/Zendos1/TimerControl/master/Screenshots/demo1.gif">
 </p>
 
 ## Getting Started
