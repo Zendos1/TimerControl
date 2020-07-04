@@ -108,6 +108,8 @@ class TimerControlTests: XCTestCase {
         XCTAssertEqual(sut.sleepCounter, sutDuration)
         XCTAssertTrue(sut.timer.isValid)
         XCTAssertEqual(sut.timer.timeInterval, 1)
+        XCTAssertTrue(sut.displaySecondsCountCalled)
+        XCTAssertEqual(sut.counterLabel.text, sut.displaySecondsCount(seconds: sut.sleepDuration))
         XCTAssertEqual(sut.animateArcCalledWithDuration, sutDuration)
     }
 
@@ -236,7 +238,7 @@ class TimerControlTests: XCTestCase {
 
     func testDidMoveToWindow_shouldInvalidateLayout() {
         sut.sleepDuration = 1
-        sut.allowCallTrackingInMethod = true
+        sut.allowCallTrackingForSetNeedsDisplay = true
         sut.didMoveToWindow()
 
         XCTAssertTrue(sut.setNeedsDisplayCalled)
@@ -244,7 +246,7 @@ class TimerControlTests: XCTestCase {
 
     func testDidMoveToWindow_shouldNotInvalidateLayout() {
         sut.sleepDuration = 0
-        sut.allowCallTrackingInMethod = true
+        sut.allowCallTrackingForSetNeedsDisplay = true
         sut.didMoveToWindow()
 
         XCTAssertFalse(sut.setNeedsDisplayCalled)

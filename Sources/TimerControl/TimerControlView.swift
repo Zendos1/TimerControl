@@ -32,7 +32,6 @@ public class TimerControlView: UIView {
             if (sleepDuration >= 3600) {
                 sleepDuration = 3599
             }
-            counterLabel.text = displaySecondsCount(seconds: sleepDuration)
         }
     }
 
@@ -83,14 +82,18 @@ public class TimerControlView: UIView {
                                      selector: #selector(updateCounter),
                                      userInfo: nil,
                                      repeats: true)
+        counterLabel.text = displaySecondsCount(seconds: sleepDuration)
         animateArcWithDuration(duration: sleepDuration)
     }
 
     /// stop the timer
     public func stopTimer() {
         timer.invalidate()
-        guard sleepDuration > 0 else { return }
-        stopTimerAnimation()
+        if sleepDuration > 0 {
+            stopTimerAnimation()
+        }
+        resetTimerState()
+        counterLabel.text = displaySecondsCount(seconds: 0)
     }
 
     // MARK: Notification Observers
