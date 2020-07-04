@@ -74,6 +74,7 @@ public class TimerControlView: UIView {
     /// - Parameters:
     ///     - duration: Int value representing the duration of the timer in seconds
     public func startTimer(duration: Int) {
+        prepareArclayerForRedraw()
         sleepDuration = duration
         sleepCounter = sleepDuration
         timer.invalidate()
@@ -220,6 +221,7 @@ public class TimerControlView: UIView {
     func prepareArclayerForRedraw() {
         arcLayer()?.removeAnimation(forKey: TimerControlConstants.arcLayerAnimationID)
         arcLayer()?.path = nil
+        setNeedsDisplay()
     }
 
     func displaySecondsCount(seconds: Int) -> String {

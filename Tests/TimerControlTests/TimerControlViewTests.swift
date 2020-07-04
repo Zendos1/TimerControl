@@ -103,6 +103,7 @@ class TimerControlTests: XCTestCase {
     func testStartTimer() {
         sut.startTimer(duration: sutDuration)
 
+        XCTAssertTrue(sut.prepareArclayerForRedrawCalled)
         XCTAssertEqual(sut.sleepDuration, sutDuration)
         XCTAssertEqual(sut.sleepCounter, sutDuration)
         XCTAssertTrue(sut.timer.isValid)
@@ -299,10 +300,12 @@ class TimerControlTests: XCTestCase {
         let mockLayer = MockCAShapeLayer()
         mockLayer.path = mockBezierPath.cgPath
         sut.mockLayer = mockLayer
+        sut.allowCallTrackingForSetNeedsDisplay = true
         sut.prepareArclayerForRedraw()
 
         XCTAssertEqual(mockLayer.animationRemovedForKey, TimerControlConstants.arcLayerAnimationID)
         XCTAssertNil(mockLayer.path)
+        XCTAssertTrue(sut.setNeedsDisplayCalled)
     }
 
     func testDisplaySecondsCount_variousOutputs() {
