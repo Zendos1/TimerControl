@@ -16,7 +16,7 @@ class MockSut: TimerControlView {
     var prepareArclayerForRedrawCalled = false
     var retrieveTimerStateFromUserDefaultsCalled = false
     var resetTimerStateCalled = false
-    var setupCounterLabelCalledWithTextColor: UIColor?
+    var addCounterLabelCalled = false 
     var animateArcCalledWithDuration: Int?
     var drawInnerOvalCalled = false
     var outerArcRect: CGRect?
@@ -33,6 +33,9 @@ class MockSut: TimerControlView {
     var mockArcWidth: CGFloat?
     var allowCallTrackingForSetNeedsDisplay = false
     var setNeedsDisplayCalled = false
+    var removeArcLayerCalled = false
+    var removeCounterLabelCalled = false
+    var addSubviewCalled = false
 
     convenience init(frame: CGRect,
                      notificationCentre: NotificationCenter,
@@ -47,9 +50,9 @@ class MockSut: TimerControlView {
         super.setupApplicationStateObservers()
     }
 
-    override func setupCounterLabel(textColor: UIColor) {
-        setupCounterLabelCalledWithTextColor = textColor
-        super.setupCounterLabel(textColor: textColor)
+    override func addCounterLabel() {
+        addCounterLabelCalled = true
+        super.addCounterLabel()
     }
 
     override func animateArcWithDuration(duration: Int) {
@@ -138,6 +141,21 @@ class MockSut: TimerControlView {
             setNeedsDisplayCalled = true
         }
         super.setNeedsDisplay()
+    }
+
+    override func removeArcLayer() {
+        removeArcLayerCalled = true
+        super.removeArcLayer()
+    }
+
+    override func removeCounterLabel() {
+        removeCounterLabelCalled = true
+        super.removeCounterLabel()
+    }
+
+    override func addSubview(_ view: UIView) {
+        addSubviewCalled = true
+        super.addSubview(view)
     }
 }
 

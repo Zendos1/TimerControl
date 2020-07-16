@@ -73,7 +73,7 @@ class TimerControlTests: XCTestCase {
     func testInitWithFrame() {
         XCTAssertEqual(sut.frame, mockFrame)
         XCTAssertTrue(sut.setupApplicationStateObserversCalled)
-        XCTAssertEqual(sut.setupCounterLabelCalledWithTextColor, .white)
+        XCTAssertTrue(sut.addCounterLabelCalled)
     }
 
     // MARK: Public API
@@ -81,26 +81,57 @@ class TimerControlTests: XCTestCase {
     func testConfigureTimerControlDefaultValues() {
         XCTAssertEqual(sut.innerColor, .gray)
         XCTAssertEqual(sut.outerColor, .blue)
-        XCTAssertEqual(sut.setupCounterLabelCalledWithTextColor, .white)
+        XCTAssertEqual(sut.counterTextColor, .white)
         XCTAssertEqual(sut.arcWidth, 1)
         XCTAssertEqual(sut.arcDashPattern, .none)
     }
 
-    func testConfigureTimerControlWithValues() {
+    func testConfigureTimerControlWithValues_notAddingCounterLabel() {
+        sut.allowCallTrackingForSetNeedsDisplay = true
+        sut.addCounterLabelCalled = false
         sut.configureTimerControl(innerColor: .green,
                                   outerColor: .red,
                                   counterTextColor: .yellow,
+                                  hideInactiveCounter: true,
                                   arcWidth: 10,
                                   arcDashPattern: .wide)
 
+        XCTAssertTrue(sut.removeCounterLabelCalled)
+        XCTAssertTrue(sut.removeArcLayerCalled)
         XCTAssertEqual(sut.innerColor, .green)
         XCTAssertEqual(sut.outerColor, .red)
-        XCTAssertEqual(sut.counterLabel.textColor, .yellow)
+        XCTAssertEqual(sut.counterTextColor, .yellow)
+        XCTAssertEqual(sut.hideInactiveCounter, true)
         XCTAssertEqual(sut.arcWidth, 10)
         XCTAssertEqual(sut.arcDashPattern, .wide)
+        XCTAssertFalse(sut.addCounterLabelCalled)
+        XCTAssertTrue(sut.setNeedsDisplayCalled)
+    }
+
+    func testConfigureTimerControlWithValues_addingCounterLabel() {
+        sut.allowCallTrackingForSetNeedsDisplay = true
+        sut.addCounterLabelCalled = false
+        sut.configureTimerControl(innerColor: .green,
+                                  outerColor: .red,
+                                  counterTextColor: .yellow,
+                                  hideInactiveCounter: false,
+                                  arcWidth: 10,
+                                  arcDashPattern: .wide)
+
+        XCTAssertTrue(sut.removeCounterLabelCalled)
+        XCTAssertTrue(sut.removeArcLayerCalled)
+        XCTAssertEqual(sut.innerColor, .green)
+        XCTAssertEqual(sut.outerColor, .red)
+        XCTAssertEqual(sut.counterTextColor, .yellow)
+        XCTAssertEqual(sut.hideInactiveCounter, false)
+        XCTAssertEqual(sut.arcWidth, 10)
+        XCTAssertEqual(sut.arcDashPattern, .wide)
+        XCTAssertTrue(sut.addCounterLabelCalled)
+        XCTAssertTrue(sut.setNeedsDisplayCalled)
     }
 
     func testStartTimer() {
+        sut.addCounterLabelCalled = false
         sut.startTimer(duration: sutDuration)
 
         XCTAssertTrue(sut.prepareArclayerForRedrawCalled)
@@ -109,6 +140,7 @@ class TimerControlTests: XCTestCase {
         XCTAssertTrue(sut.timer.isValid)
         XCTAssertEqual(sut.timer.timeInterval, 1)
         XCTAssertTrue(sut.displaySecondsCountCalled)
+        XCTAssertTrue(sut.addCounterLabelCalled)
         XCTAssertEqual(sut.counterLabel.text, sut.displaySecondsCount(seconds: sut.sleepDuration))
         XCTAssertEqual(sut.animateArcCalledWithDuration, sutDuration)
     }
@@ -192,7 +224,7 @@ class TimerControlTests: XCTestCase {
 
     // MARK: View
 
-    func testSetupCounterLabel() {
+    func testAddCounterLabel_noneExisting() {
         XCTAssertEqual(sut.counterLabel.frame, CGRect.zero)
         XCTAssertEqual(sut.counterLabel.textAlignment, .center)
         XCTAssertEqual(sut.counterLabel.textColor, .white)
@@ -207,7 +239,21 @@ class TimerControlTests: XCTestCase {
         XCTAssertEqual(sut.counterLabel.text, sut.displaySecondsCount(seconds: 0))
     }
 
+    func testAddCounterLabel_subviewAlreadyExists() {
+        sut.addSubviewCalled = false
+        sut.addCounterLabel()
+
+        XCTAssertFalse(sut.addSubviewCalled)
+    }
+
+    func testRemoveCounterLabel() {
+        sut.removeCounterLabel()
+
+        XCTAssertFalse(sut.subviews.contains(sut.counterLabel))
+    }
+
     func testDraw_validCGRect_validDuration() {
+        sut.addCounterLabelCalled = false
         sut.sleepDuration = sutDuration
         sut.sleepCounter = sutCounter
         sut.draw(mockFrame)
@@ -216,15 +262,18 @@ class TimerControlTests: XCTestCase {
         XCTAssertTrue(sut.drawInnerOvalCalled)
         XCTAssertEqual(sut.outerArcRect, mockFrame)
         XCTAssertEqual(sut.animateArcCalledWithDuration, sutCounter)
+        XCTAssertTrue(sut.addCounterLabelCalled)
     }
 
     func testDraw_validCGRect_zeroDuration() {
+        sut.addCounterLabelCalled = false
         sut.draw(mockFrame)
 
         XCTAssertEqual(sut.pathForInnerOvalCalledWithRect, mockFrame)
         XCTAssertTrue(sut.drawInnerOvalCalled)
         XCTAssertEqual(sut.outerArcRect, mockFrame)
         XCTAssertNil(sut.animateArcCalledWithDuration)
+        XCTAssertFalse(sut.addCounterLabelCalled)
     }
 
     func testDraw_invalidCGRect() {
@@ -370,6 +419,14 @@ class TimerControlTests: XCTestCase {
         XCTAssertEqual(sut.arcLayer(), mockLayer)
     }
 
+    func testRemoveArcLayer() {
+        sut.layer.sublayers = []
+        sut.drawOuterArc(mockFrame)
+        sut.removeArcLayer()
+
+        XCTAssertNil(sut.layer.sublayers)
+    }
+
     func testArcWidth() {
         sut.arcWidth = 5
         let expectedWidth = mockFrame.width * TimerControlConstants.arcWidthIncrement * 5.0
@@ -420,15 +477,27 @@ class TimerControlTests: XCTestCase {
         XCTAssertEqual(sut.completedTimerPercentage(), expectedCompletedPercentage)
     }
 
-    func testResetTimerState() {
+    func testResetTimerState_hideInactiveCounter() {
         sut.sleepDuration = 2
         sut.sleepCounter = 1
+        sut.hideInactiveCounter = true
         sut.resetTimerState()
 
         XCTAssertEqual(sut.sleepDuration, 0)
         XCTAssertEqual(sut.sleepCounter, 0)
+        XCTAssertTrue(sut.removeCounterLabelCalled)
     }
 
+    func testResetTimerState_doNotHideInactiveCounter() {
+        sut.sleepDuration = 2
+        sut.sleepCounter = 1
+        sut.hideInactiveCounter = false
+        sut.resetTimerState()
+
+        XCTAssertEqual(sut.sleepDuration, 0)
+        XCTAssertEqual(sut.sleepCounter, 0)
+        XCTAssertFalse(sut.removeCounterLabelCalled)
+    }
 
     // MARK: CAAnimationDelegate
 

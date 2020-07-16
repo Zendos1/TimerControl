@@ -25,6 +25,8 @@ public class TimerControlView: UIView {
     }
     var arcDashPattern: TimerControlDashPattern = .none
     var counterLabel = UILabel()
+    var counterTextColor: UIColor = .white
+    var hideInactiveCounter = false
     var timer = Timer()
     var sleepCounter: Int = 0
     var sleepDuration: Int = 0 {
@@ -36,16 +38,20 @@ public class TimerControlView: UIView {
     }
 
     required init(coder aDecoder: NSCoder) {
+        outerColor = .blue
         super.init(coder: aDecoder)!
         backgroundColor = .clear
         setupApplicationStateObservers()
-        setupCounterLabel(textColor: .white)
+        if hideInactiveCounter == false {
+            addCounterLabel()
+        }
     }
 
     public override init(frame: CGRect) {
+        outerColor = .blue
         super.init(frame: frame)
         setupApplicationStateObservers()
-        setupCounterLabel(textColor: .white)
+        addCounterLabel()
     }
 
     // MARK: Public API
@@ -60,13 +66,21 @@ public class TimerControlView: UIView {
     public func configureTimerControl(innerColor: UIColor = .gray,
                                       outerColor: UIColor = .blue,
                                       counterTextColor: UIColor = .white,
+                                      hideInactiveCounter: Bool = false,
                                       arcWidth: Int = 1,
                                       arcDashPattern: TimerControlDashPattern = .none) {
+        removeCounterLabel()
+        removeArcLayer()
         self.innerColor = innerColor
         self.outerColor = outerColor
-        self.counterLabel.textColor = counterTextColor
+        self.counterTextColor = counterTextColor
+        self.hideInactiveCounter = hideInactiveCounter
         self.arcWidth = arcWidth
         self.arcDashPattern = arcDashPattern
+        if hideInactiveCounter == false {
+            addCounterLabel()
+        }
+        setNeedsDisplay()
     }
 
     /// start the timer
@@ -82,6 +96,7 @@ public class TimerControlView: UIView {
                                      selector: #selector(updateCounter),
                                      userInfo: nil,
                                      repeats: true)
+        addCounterLabel()
         counterLabel.text = displaySecondsCount(seconds: sleepDuration)
         animateArcWithDuration(duration: sleepDuration)
     }
@@ -142,10 +157,11 @@ public class TimerControlView: UIView {
 
     // MARK: View
 
-    func setupCounterLabel(textColor: UIColor) {
+    func addCounterLabel() {
+        guard subviews.contains(counterLabel) == false else { return }
         counterLabel = UILabel(frame: CGRect.zero)
         counterLabel.textAlignment = .center
-        counterLabel.textColor = textColor
+        counterLabel.textColor = counterTextColor
         counterLabel.translatesAutoresizingMaskIntoConstraints = false
         addSubview(counterLabel)
         let centreX = NSLayoutConstraint(item: counterLabel,
@@ -163,7 +179,12 @@ public class TimerControlView: UIView {
                                          multiplier: 1.5,
                                          constant: 0)
         addConstraints([centreX, centreY])
-        counterLabel.text = displaySecondsCount(seconds: 0)
+        counterLabel.text = displaySecondsCount(seconds: sleepCounter)
+    }
+
+    func removeCounterLabel() {
+        counterLabel.removeFromSuperview()
+        print("something")
     }
 
     override public func draw(_ rect: CGRect) {
@@ -174,6 +195,7 @@ public class TimerControlView: UIView {
         drawOuterArc(rect)
         if(sleepDuration > 0) {
             animateArcWithDuration(duration: sleepCounter)
+            addCounterLabel()
         }
     }
 
@@ -265,6 +287,12 @@ public class TimerControlView: UIView {
         }).first
     }
 
+    public func removeArcLayer() {
+        layer.sublayers = layer.sublayers?.compactMap({ sublayer in
+            sublayer.name == TimerControlConstants.arcLayerID ? nil : sublayer as? CAShapeLayer
+        })
+    }
+
     func arcWidth(_ rect: CGRect) -> CGFloat {
         return rect.width * TimerControlConstants.arcWidthIncrement * CGFloat(self.arcWidth)
     }
@@ -296,6 +324,9 @@ public class TimerControlView: UIView {
     func resetTimerState() {
         sleepDuration = 0
         sleepCounter = 0
+        if hideInactiveCounter == true {
+            removeCounterLabel()
+        }
     }
 }
 
