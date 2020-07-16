@@ -42,9 +42,7 @@ public class TimerControlView: UIView {
         super.init(coder: aDecoder)!
         backgroundColor = .clear
         setupApplicationStateObservers()
-        if hideInactiveCounter == false {
-            addCounterLabel()
-        }
+        addCounterLabel()
     }
 
     public override init(frame: CGRect) {
