@@ -80,15 +80,18 @@ Include TimerControl framework in your project using one of the above processes.
 Create a UIView either programatically or in a xib or storyboard, set the type of the UIView to `TimerControlView`.
 Ensure the UIView has a 1:1 aspect ratio - TimerControl will not draw and will crash the host application unless it is strictly 1:1.
 
-The visual setup of the TimerControl can be configured before it is used by calling hte below API with the desired configurations.
+The visual setup of the TimerControl can be configured before it is used by calling the below API with the desired configurations.
 If the configuration API is not called then the default values are used for all configurable options.
+The configuration API can be called at any time after initialisation and will update configurations at runtime.
+It is especially useful for use in darkmode enabling.
 
->`configureTimerControl(innerColor: UIColor = .gray, outerColor: UIColor = .blue, counterTextColor: UIColor = .white, arcWidth: Int = 1, arcDashPattern: TimerControlDashPattern = .none)`
+>`configureTimerControl(innerColor: UIColor = .gray, outerColor: UIColor = .blue, counterTextColor: UIColor = .white, hideInactiveCounter: Bool = false, arcWidth: Int = 1, arcDashPattern: TimerControlDashPattern = .none)`
 
 The configurable values are: 
 - innerColor: UIColor describing the innerOval color
 - outerColor: UIColor describing the outer arc color
 - counterTextColor: UIColor describing the counter text color
+- hideInactiveCounter: display counter label only when timer is active
 - arcWidth: a value between 1 and 10 describing the arc width as a proportion of the view size
 - arcDashPattern: TimerControlDashPattern enum with 4 preset patterns (.none, .medium, .narrow, .wide)
 

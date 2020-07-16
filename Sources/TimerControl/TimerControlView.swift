@@ -61,6 +61,7 @@ public class TimerControlView: UIView {
     ///     - innerColor: UIColor describing the innerOval color
     ///     - outerColor: UIColor describing the outer arc color
     ///     - counterTextColor: UIColor describing the counter text color
+    ///     - hideInactiveCounter: display counter label only when timer is active
     ///     - arcWidth: a value between 1 and 10 describing the arc width as a proportion of the view size
     ///     - arcDashPattern: TimerControlDashPattern enum with 4 preset patterns
     public func configureTimerControl(innerColor: UIColor = .gray,
