@@ -44,14 +44,27 @@
                                     <action selector="resetSleep" destination="BYZ-38-t0r" eventType="touchUpInside" id="IFr-Gq-we0"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qDv-Iz-gO6">
+                                <rect key="frame" x="137" y="86" width="140" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="30" id="1Ha-kT-JfX"/>
+                                </constraints>
+                                <state key="normal" title="Configure"/>
+                                <connections>
+                                    <action selector="configure" destination="BYZ-38-t0r" eventType="touchUpInside" id="MmJ-YK-mU9"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
                             <constraint firstItem="iWX-LX-YQS" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="1EC-St-hxp"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="npw-e7-BJ0" secondAttribute="trailing" constant="39" id="67E-AP-qUw"/>
                             <constraint firstItem="npw-e7-BJ0" firstAttribute="top" secondItem="iWX-LX-YQS" secondAttribute="top" id="6st-hb-qY5"/>
+                            <constraint firstItem="qDv-Iz-gO6" firstAttribute="top" secondItem="iWX-LX-YQS" secondAttribute="bottom" constant="8" id="8GT-al-e3i"/>
+                            <constraint firstItem="qDv-Iz-gO6" firstAttribute="trailing" secondItem="iWX-LX-YQS" secondAttribute="trailing" id="FMT-DT-HY5"/>
                             <constraint firstItem="npw-e7-BJ0" firstAttribute="leading" secondItem="iWX-LX-YQS" secondAttribute="trailing" constant="8" id="HZw-uQ-rjN"/>
                             <constraint firstItem="iWX-LX-YQS" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="KCA-8t-w60"/>
+                            <constraint firstItem="qDv-Iz-gO6" firstAttribute="leading" secondItem="iWX-LX-YQS" secondAttribute="leading" id="Q0n-Pj-ePg"/>
                             <constraint firstItem="Mur-nL-cpf" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="37" id="Q5q-PL-cck"/>
                             <constraint firstItem="Mur-nL-cpf" firstAttribute="top" secondItem="iWX-LX-YQS" secondAttribute="top" id="gvn-x7-gMV"/>
                             <constraint firstItem="8yr-D8-rcw" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="qEY-XO-FRA"/>
@@ -67,7 +80,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="12" y="39"/>
+            <point key="canvasLocation" x="11.594202898550726" y="38.839285714285715"/>
         </scene>
     </scenes>
 </document>
